@@ -1,0 +1,39 @@
+
+<div>
+    <h2><span translate="teachitApp.multipleChoiceQuestion.detail.title">Multiple Choice Question</span> {{vm.multipleChoiceQuestion.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span translate="teachitApp.multipleChoiceQuestion.ordering">Ordering</span></dt>
+        <dd>
+            <span>{{vm.multipleChoiceQuestion.ordering}}</span>
+        </dd>
+        <dt><span translate="teachitApp.multipleChoiceQuestion.startDate">Start Date</span></dt>
+        <dd>
+            <span>{{vm.multipleChoiceQuestion.startDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span translate="teachitApp.multipleChoiceQuestion.question">Question</span></dt>
+        <dd>
+            <span>{{vm.multipleChoiceQuestion.question}}</span>
+        </dd>
+        <dt><span translate="teachitApp.multipleChoiceQuestion.course">Course</span></dt>
+        <dd>
+            <a ui-sref="course-detail({id:vm.multipleChoiceQuestion.courseId})">{{vm.multipleChoiceQuestion.courseName}}</a>
+        </dd>
+        <dt><span translate="teachitApp.multipleChoiceQuestion.lesson">Lesson</span></dt>
+        <dd>
+            <a ui-sref="lesson-detail({id:vm.multipleChoiceQuestion.lessonId})">{{vm.multipleChoiceQuestion.lessonName}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="multiple-choice-question-detail.edit({id:vm.multipleChoiceQuestion.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm" translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

@@ -1,0 +1,25 @@
+{
+    "teachitApp": {
+        "applicationAdmission" : {
+            "home": {
+                "title": "Application Admissions",
+                "createLabel": "Create a new Application Admission",
+                "createOrEditLabel": "Create or edit a Application Admission",
+                "search": "Search for Application Admission"
+            },
+            "created": "A new Application Admission is created with identifier {{ param }}",
+            "updated": "A Application Admission is updated with identifier {{ param }}",
+            "deleted": "A Application Admission is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Application Admission {{ id }}?"
+            },
+            "detail": {
+                "title": "Application Admission"
+            },
+            "requestDate": "Request Date",
+            "accepted": "Accepted",
+            "candidate": "Candidate",
+            "course": "Course"
+        }
+    }
+}

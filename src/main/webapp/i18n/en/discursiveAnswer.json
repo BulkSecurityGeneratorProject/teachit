@@ -1,0 +1,24 @@
+{
+    "teachitApp": {
+        "discursiveAnswer" : {
+            "home": {
+                "title": "Discursive Answers",
+                "createLabel": "Create a new Discursive Answer",
+                "createOrEditLabel": "Create or edit a Discursive Answer",
+                "search": "Search for Discursive Answer"
+            },
+            "created": "A new Discursive Answer is created with identifier {{ param }}",
+            "updated": "A Discursive Answer is updated with identifier {{ param }}",
+            "deleted": "A Discursive Answer is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Discursive Answer {{ id }}?"
+            },
+            "detail": {
+                "title": "Discursive Answer"
+            },
+            "answer": "Answer",
+            "question": "Question",
+            "student": "Student"
+        }
+    }
+}

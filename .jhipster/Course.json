@@ -1,0 +1,73 @@
+{
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "relationshipName": "applicationAdmission",
+      "otherEntityName": "applicationAdmission",
+      "otherEntityField": "id",
+      "ownerSide": true,
+      "otherEntityRelationshipName": "course"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "relationshipName": "multipleChoice",
+      "otherEntityName": "multipleChoiceQuestion",
+      "otherEntityRelationshipName": "course"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "relationshipName": "discursiveAnswer",
+      "otherEntityName": "discursiveQuestion",
+      "otherEntityRelationshipName": "course"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "relationshipName": "contents",
+      "otherEntityName": "content",
+      "otherEntityRelationshipName": "course"
+    },
+    {
+      "relationshipType": "many-to-many",
+      "relationshipName": "lessons",
+      "otherEntityName": "lesson",
+      "otherEntityField": "name",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "many-to-one",
+      "relationshipName": "teacher",
+      "otherEntityName": "person",
+      "otherEntityField": "name"
+    },
+    {
+      "relationshipType": "many-to-many",
+      "relationshipName": "students",
+      "otherEntityName": "person",
+      "ownerSide": false,
+      "otherEntityRelationshipName": "learningCoursees"
+    }
+  ],
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "startDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "public",
+      "fieldType": "Boolean"
+    }
+  ],
+  "changelogDate": "20160730195925",
+  "entityTableName": "course",
+  "dto": "mapstruct",
+  "pagination": "infinite-scroll",
+  "service": "serviceImpl"
+}

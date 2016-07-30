@@ -1,0 +1,27 @@
+{
+  "relationships": [
+    {
+      "relationshipName": "person",
+      "otherEntityName": "person",
+      "relationshipType": "many-to-one",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "relationshipName": "content",
+      "otherEntityName": "content",
+      "otherEntityField": "description"
+    }
+  ],
+  "fields": [
+    {
+      "fieldName": "view",
+      "fieldType": "Boolean"
+    }
+  ],
+  "changelogDate": "20160730195927",
+  "entityTableName": "content_view",
+  "dto": "mapstruct",
+  "pagination": "infinite-scroll",
+  "service": "serviceImpl"
+}

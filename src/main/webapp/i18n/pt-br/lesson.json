@@ -1,0 +1,29 @@
+{
+    "teachitApp": {
+        "lesson" : {
+            "home": {
+                "title": "Lessons",
+                "createLabel": "Criar novo Lesson",
+                "createOrEditLabel": "Criar ou editar Lesson",
+                "search": "Pesquisar por Lesson"
+            },
+            "created": "Um novo Lesson é criado com o identificador {{ param }}",
+            "updated": "Um Lesson é atualizado com o identificador {{ param }}",
+            "deleted": "Um Lesson é deletado com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza de que deseja excluir Lesson {{ id }}?"
+            },
+            "detail": {
+                "title": "Lesson"
+            },
+            "ordering": "Ordering",
+            "startDate": "Start Date",
+            "name": "Name",
+            "description": "Description",
+            "multipleChoice": "Multiple Choice",
+            "discursiveAnswer": "Discursive Answer",
+            "contents": "Contents",
+            "course": "Course"
+        }
+    }
+}

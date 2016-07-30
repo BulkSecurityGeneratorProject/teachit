@@ -1,0 +1,24 @@
+{
+    "teachitApp": {
+        "contentView" : {
+            "home": {
+                "title": "Content Views",
+                "createLabel": "Create a new Content View",
+                "createOrEditLabel": "Create or edit a Content View",
+                "search": "Search for Content View"
+            },
+            "created": "A new Content View is created with identifier {{ param }}",
+            "updated": "A Content View is updated with identifier {{ param }}",
+            "deleted": "A Content View is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Content View {{ id }}?"
+            },
+            "detail": {
+                "title": "Content View"
+            },
+            "view": "View",
+            "person": "Person",
+            "content": "Content"
+        }
+    }
+}

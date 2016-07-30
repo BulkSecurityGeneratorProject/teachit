@@ -1,0 +1,43 @@
+
+<div>
+    <h2><span translate="teachitApp.content.detail.title">Content</span> {{vm.content.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span translate="teachitApp.content.fileName">File Name</span></dt>
+        <dd>
+            <span>{{vm.content.fileName}}</span>
+        </dd>
+        <dt><span translate="teachitApp.content.startDate">Start Date</span></dt>
+        <dd>
+            <span>{{vm.content.startDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span translate="teachitApp.content.description">Description</span></dt>
+        <dd>
+            <span>{{vm.content.description}}</span>
+        </dd>
+        <dt><span translate="teachitApp.content.text">Text</span></dt>
+        <dd>
+            <span>{{vm.content.text}}</span>
+        </dd>
+        <dt><span translate="teachitApp.content.course">Course</span></dt>
+        <dd>
+            <a ui-sref="course-detail({id:vm.content.courseId})">{{vm.content.courseName}}</a>
+        </dd>
+        <dt><span translate="teachitApp.content.course">Course</span></dt>
+        <dd>
+            <a ui-sref="lesson-detail({id:vm.content.courseId})">{{vm.content.courseName}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="content-detail.edit({id:vm.content.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm" translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

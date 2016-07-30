@@ -1,0 +1,35 @@
+
+<div>
+    <h2><span translate="teachitApp.choice.detail.title">Choice</span> {{vm.choice.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span translate="teachitApp.choice.response">Response</span></dt>
+        <dd>
+            <span>{{vm.choice.response}}</span>
+        </dd>
+        <dt><span translate="teachitApp.choice.correct">Correct</span></dt>
+        <dd>
+            <span>{{vm.choice.correct}}</span>
+        </dd>
+        <dt><span translate="teachitApp.choice.ordering">Ordering</span></dt>
+        <dd>
+            <span>{{vm.choice.ordering}}</span>
+        </dd>
+        <dt><span translate="teachitApp.choice.question">Question</span></dt>
+        <dd>
+            <a ui-sref="multiple-choice-question-detail({id:vm.choice.questionId})">{{vm.choice.questionQuestion}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="choice-detail.edit({id:vm.choice.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm" translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

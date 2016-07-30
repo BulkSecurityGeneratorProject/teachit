@@ -1,0 +1,25 @@
+{
+    "teachitApp": {
+        "choice" : {
+            "home": {
+                "title": "Choices",
+                "createLabel": "Criar novo Choice",
+                "createOrEditLabel": "Criar ou editar Choice",
+                "search": "Pesquisar por Choice"
+            },
+            "created": "Um novo Choice é criado com o identificador {{ param }}",
+            "updated": "Um Choice é atualizado com o identificador {{ param }}",
+            "deleted": "Um Choice é deletado com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza de que deseja excluir Choice {{ id }}?"
+            },
+            "detail": {
+                "title": "Choice"
+            },
+            "response": "Response",
+            "correct": "Correct",
+            "ordering": "Ordering",
+            "question": "Question"
+        }
+    }
+}

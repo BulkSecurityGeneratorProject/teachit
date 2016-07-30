@@ -1,0 +1,41 @@
+{
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "relationshipName": "answer",
+      "otherEntityName": "choice",
+      "otherEntityRelationshipName": "question"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "relationshipName": "course",
+      "otherEntityName": "course",
+      "otherEntityField": "name"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "relationshipName": "lesson",
+      "otherEntityName": "lesson",
+      "otherEntityField": "name"
+    }
+  ],
+  "fields": [
+    {
+      "fieldName": "ordering",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "startDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "question",
+      "fieldType": "String"
+    }
+  ],
+  "changelogDate": "20160730194550",
+  "entityTableName": "multiple_choice_question",
+  "dto": "mapstruct",
+  "pagination": "infinite-scroll",
+  "service": "serviceImpl"
+}

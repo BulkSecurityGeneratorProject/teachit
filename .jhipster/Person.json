@@ -1,0 +1,42 @@
+{
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "relationshipName": "applicationAdmission",
+      "otherEntityName": "applicationAdmission",
+      "otherEntityField": "id",
+      "ownerSide": true,
+      "otherEntityRelationshipName": "candidate"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "relationshipName": "views",
+      "otherEntityName": "contentView",
+      "otherEntityRelationshipName": "person"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "relationshipName": "teachingCoursees",
+      "otherEntityName": "course",
+      "otherEntityRelationshipName": "teacher"
+    },
+    {
+      "relationshipType": "many-to-many",
+      "relationshipName": "learningCoursees",
+      "otherEntityName": "course",
+      "otherEntityField": "name",
+      "ownerSide": true
+    }
+  ],
+  "fields": [
+    {
+      "fieldName": "active",
+      "fieldType": "Boolean"
+    }
+  ],
+  "changelogDate": "20160730195918",
+  "entityTableName": "person",
+  "dto": "mapstruct",
+  "pagination": "infinite-scroll",
+  "service": "serviceImpl"
+}

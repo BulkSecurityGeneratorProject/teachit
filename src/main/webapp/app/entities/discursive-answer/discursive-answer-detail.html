@@ -1,0 +1,31 @@
+
+<div>
+    <h2><span translate="teachitApp.discursiveAnswer.detail.title">Discursive Answer</span> {{vm.discursiveAnswer.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span translate="teachitApp.discursiveAnswer.answer">Answer</span></dt>
+        <dd>
+            <span>{{vm.discursiveAnswer.answer}}</span>
+        </dd>
+        <dt><span translate="teachitApp.discursiveAnswer.question">Question</span></dt>
+        <dd>
+            <a ui-sref="discursive-question-detail({id:vm.discursiveAnswer.questionId})">{{vm.discursiveAnswer.questionQuestion}}</a>
+        </dd>
+        <dt><span translate="teachitApp.discursiveAnswer.student">Student</span></dt>
+        <dd>
+            <a ui-sref="person-detail({id:vm.discursiveAnswer.studentId})">{{vm.discursiveAnswer.studentId}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="discursive-answer-detail.edit({id:vm.discursiveAnswer.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm" translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

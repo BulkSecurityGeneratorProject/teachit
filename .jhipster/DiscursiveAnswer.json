@@ -1,0 +1,27 @@
+{
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "relationshipName": "question",
+      "otherEntityName": "discursiveQuestion",
+      "otherEntityField": "question"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "relationshipName": "student",
+      "otherEntityName": "person",
+      "otherEntityField": "id"
+    }
+  ],
+  "fields": [
+    {
+      "fieldName": "answer",
+      "fieldType": "String"
+    }
+  ],
+  "changelogDate": "20160730195922",
+  "entityTableName": "discursive_answer",
+  "dto": "mapstruct",
+  "pagination": "infinite-scroll",
+  "service": "serviceImpl"
+}

@@ -1,0 +1,31 @@
+
+<div>
+    <h2><span translate="teachitApp.multipleChoiceAnswer.detail.title">Multiple Choice Answer</span> {{vm.multipleChoiceAnswer.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span translate="teachitApp.multipleChoiceAnswer.choosen">Choosen</span></dt>
+        <dd>
+            <a ui-sref="choice-detail({id:vm.multipleChoiceAnswer.choosenId})">{{vm.multipleChoiceAnswer.choosenResponse}}</a>
+        </dd>
+        <dt><span translate="teachitApp.multipleChoiceAnswer.question">Question</span></dt>
+        <dd>
+            <a ui-sref="multiple-choice-question-detail({id:vm.multipleChoiceAnswer.questionId})">{{vm.multipleChoiceAnswer.questionQuestion}}</a>
+        </dd>
+        <dt><span translate="teachitApp.multipleChoiceAnswer.student">Student</span></dt>
+        <dd>
+            <a ui-sref="person-detail({id:vm.multipleChoiceAnswer.studentId})">{{vm.multipleChoiceAnswer.studentId}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="multiple-choice-answer-detail.edit({id:vm.multipleChoiceAnswer.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm" translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

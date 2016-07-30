@@ -1,0 +1,33 @@
+{
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "relationshipName": "candidate",
+      "otherEntityName": "person",
+      "ownerSide": false,
+      "otherEntityRelationshipName": "applicationAdmission"
+    },
+    {
+      "relationshipType": "one-to-one",
+      "relationshipName": "course",
+      "otherEntityName": "course",
+      "ownerSide": false,
+      "otherEntityRelationshipName": "applicationAdmission"
+    }
+  ],
+  "fields": [
+    {
+      "fieldName": "requestDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "accepted",
+      "fieldType": "Boolean"
+    }
+  ],
+  "changelogDate": "20160730195926",
+  "entityTableName": "application_admission",
+  "dto": "mapstruct",
+  "pagination": "infinite-scroll",
+  "service": "serviceImpl"
+}

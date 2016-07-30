@@ -1,0 +1,39 @@
+{
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "relationshipName": "course",
+      "otherEntityName": "course",
+      "otherEntityField": "name"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "relationshipName": "course",
+      "otherEntityName": "lesson",
+      "otherEntityField": "name"
+    }
+  ],
+  "fields": [
+    {
+      "fieldName": "fileName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "startDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "text",
+      "fieldType": "String"
+    }
+  ],
+  "changelogDate": "20160730194549",
+  "entityTableName": "content",
+  "dto": "mapstruct",
+  "pagination": "infinite-scroll",
+  "service": "serviceImpl"
+}

@@ -7,6 +7,17 @@
             "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
             "entities": {
                 "main": "Entidades",
+                "content": "Content",
+                "multipleChoiceQuestion": "Multiple Choice Question",
+                "discursiveQuestion": "Discursive Question",
+                "discursiveAnswer": "Discursive Answer",
+                "multipleChoiceAnswer": "Multiple Choice Answer",
+                "choice": "Choice",
+                "applicationAdmission": "Application Admission",
+                "course": "Course",
+                "contentView": "Content View",
+                "lesson": "Lesson",
+                "person": "Person",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

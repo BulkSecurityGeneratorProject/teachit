@@ -1,0 +1,32 @@
+{
+    "teachitApp": {
+        "course" : {
+            "home": {
+                "title": "Courses",
+                "createLabel": "Create a new Course",
+                "createOrEditLabel": "Create or edit a Course",
+                "search": "Search for Course"
+            },
+            "created": "A new Course is created with identifier {{ param }}",
+            "updated": "A Course is updated with identifier {{ param }}",
+            "deleted": "A Course is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Course {{ id }}?"
+            },
+            "detail": {
+                "title": "Course"
+            },
+            "code": "Code",
+            "startDate": "Start Date",
+            "name": "Name",
+            "public": "Public",
+            "applicationAdmission": "Application Admission",
+            "multipleChoice": "Multiple Choice",
+            "discursiveAnswer": "Discursive Answer",
+            "contents": "Contents",
+            "lessons": "Lessons",
+            "teacher": "Teacher",
+            "students": "Students"
+        }
+    }
+}

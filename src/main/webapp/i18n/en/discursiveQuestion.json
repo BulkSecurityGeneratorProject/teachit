@@ -1,0 +1,26 @@
+{
+    "teachitApp": {
+        "discursiveQuestion" : {
+            "home": {
+                "title": "Discursive Questions",
+                "createLabel": "Create a new Discursive Question",
+                "createOrEditLabel": "Create or edit a Discursive Question",
+                "search": "Search for Discursive Question"
+            },
+            "created": "A new Discursive Question is created with identifier {{ param }}",
+            "updated": "A Discursive Question is updated with identifier {{ param }}",
+            "deleted": "A Discursive Question is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Discursive Question {{ id }}?"
+            },
+            "detail": {
+                "title": "Discursive Question"
+            },
+            "ordering": "Ordering",
+            "startDate": "Start Date",
+            "question": "Question",
+            "course": "Course",
+            "lesson": "Lesson"
+        }
+    }
+}

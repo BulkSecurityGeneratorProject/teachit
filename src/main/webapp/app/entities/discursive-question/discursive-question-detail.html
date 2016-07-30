@@ -1,0 +1,39 @@
+
+<div>
+    <h2><span translate="teachitApp.discursiveQuestion.detail.title">Discursive Question</span> {{vm.discursiveQuestion.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span translate="teachitApp.discursiveQuestion.ordering">Ordering</span></dt>
+        <dd>
+            <span>{{vm.discursiveQuestion.ordering}}</span>
+        </dd>
+        <dt><span translate="teachitApp.discursiveQuestion.startDate">Start Date</span></dt>
+        <dd>
+            <span>{{vm.discursiveQuestion.startDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span translate="teachitApp.discursiveQuestion.question">Question</span></dt>
+        <dd>
+            <span>{{vm.discursiveQuestion.question}}</span>
+        </dd>
+        <dt><span translate="teachitApp.discursiveQuestion.course">Course</span></dt>
+        <dd>
+            <a ui-sref="course-detail({id:vm.discursiveQuestion.courseId})">{{vm.discursiveQuestion.courseName}}</a>
+        </dd>
+        <dt><span translate="teachitApp.discursiveQuestion.lesson">Lesson</span></dt>
+        <dd>
+            <a ui-sref="lesson-detail({id:vm.discursiveQuestion.lessonId})">{{vm.discursiveQuestion.lessonName}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="discursive-question-detail.edit({id:vm.discursiveQuestion.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm" translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

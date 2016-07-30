@@ -1,0 +1,33 @@
+
+<div>
+    <h2><span translate="teachitApp.person.detail.title">Person</span> {{vm.person.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span translate="teachitApp.person.active">Active</span></dt>
+        <dd>
+            <span>{{vm.person.active}}</span>
+        </dd>
+        <dt><span translate="teachitApp.person.applicationAdmission">Application Admission</span></dt>
+        <dd>
+            <a ui-sref="application-admission-detail({id:vm.person.applicationAdmissionId})">{{vm.person.applicationAdmissionId}}</a>
+        </dd>
+        <dt><span translate="teachitApp.person.learningCoursees">Learning Coursees</span></dt>
+        <dd>
+            <span ng-repeat="learningCoursees in vm.person.learningCoursees">
+                <a ui-sref="course-detail({id: learningCoursees.id})">{{learningCoursees.name}}</a>{{$last ? '' : ', '}}
+            </span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="person-detail.edit({id:vm.person.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm" translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

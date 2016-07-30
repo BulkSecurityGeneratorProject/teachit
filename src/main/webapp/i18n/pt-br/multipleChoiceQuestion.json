@@ -1,0 +1,27 @@
+{
+    "teachitApp": {
+        "multipleChoiceQuestion" : {
+            "home": {
+                "title": "Multiple Choice Questions",
+                "createLabel": "Criar novo Multiple Choice Question",
+                "createOrEditLabel": "Criar ou editar Multiple Choice Question",
+                "search": "Pesquisar por Multiple Choice Question"
+            },
+            "created": "Um novo Multiple Choice Question é criado com o identificador {{ param }}",
+            "updated": "Um Multiple Choice Question é atualizado com o identificador {{ param }}",
+            "deleted": "Um Multiple Choice Question é deletado com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza de que deseja excluir Multiple Choice Question {{ id }}?"
+            },
+            "detail": {
+                "title": "Multiple Choice Question"
+            },
+            "ordering": "Ordering",
+            "startDate": "Start Date",
+            "question": "Question",
+            "answer": "Answer",
+            "course": "Course",
+            "lesson": "Lesson"
+        }
+    }
+}

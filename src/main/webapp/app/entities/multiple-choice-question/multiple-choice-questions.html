@@ -1,0 +1,68 @@
+<div>
+    <h2 translate="teachitApp.multipleChoiceQuestion.home.title">Multiple Choice Questions</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="multiple-choice-question.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span  translate="teachitApp.multipleChoiceQuestion.home.createLabel">
+                        Create new Multiple Choice Question
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.reset()">
+                    <th jh-sort-by="id"><span translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="ordering"><span translate="teachitApp.multipleChoiceQuestion.ordering">Ordering</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="startDate"><span translate="teachitApp.multipleChoiceQuestion.startDate">Start Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="question"><span translate="teachitApp.multipleChoiceQuestion.question">Question</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="courseName"><span translate="teachitApp.multipleChoiceQuestion.course">Course</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lessonName"><span translate="teachitApp.multipleChoiceQuestion.lesson">Lesson</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll="vm.loadPage(vm.page + 1)" infinite-scroll-disabled="vm.page >= vm.links['last']">
+                <tr ng-repeat="multipleChoiceQuestion in vm.multipleChoiceQuestions track by multipleChoiceQuestion.id">
+                    <td><a ui-sref="multiple-choice-question-detail({id:multipleChoiceQuestion.id})">{{multipleChoiceQuestion.id}}</a></td>
+                    <td>{{multipleChoiceQuestion.ordering}}</td>
+                        <td>{{multipleChoiceQuestion.startDate | date:'mediumDate'}}</td>
+                    <td>{{multipleChoiceQuestion.question}}</td>
+                    <td>
+                        <a ui-sref="course-detail({id:multipleChoiceQuestion.courseId})">{{multipleChoiceQuestion.courseName}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="lesson-detail({id:multipleChoiceQuestion.lessonId})">{{multipleChoiceQuestion.lessonName}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="multiple-choice-question-detail({id:multipleChoiceQuestion.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="multiple-choice-question.edit({id:multipleChoiceQuestion.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="multiple-choice-question.delete({id:multipleChoiceQuestion.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

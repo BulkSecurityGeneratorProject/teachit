@@ -1,5 +1,9 @@
 
 
+entity Person {
+	active Boolean
+}
+
 entity Content {
 	fileName String,
     startDate LocalDate,
@@ -32,7 +36,7 @@ entity Choice {
     ordering Integer
 }
 
-entity Class {
+entity Course {
 	code String,
     startDate LocalDate,
     name String,
@@ -45,8 +49,7 @@ entity ApplicationAdmission {
 }
 
 entity ContentView {
-	view Boolean,
-    content Content
+	view Boolean
 }
 
 entity Lesson {
@@ -56,20 +59,8 @@ entity Lesson {
     description String
 }
 
-relationship OneToOne {
-	Class to ApplicationAdmission
-}
-
-relationship OneToOne {
-	User to ApplicationAdmission
-}
-
-relationship ManyToMany {
-	User to ContentView
-}
-
-relationship OneToOne {
-	MultipleChoiceAnswer{choosen(response)} to Choice
+relationship ManyToOne {
+  ContentView{content(description)} to Content
 }
 
 relationship ManyToOne {
@@ -81,15 +72,39 @@ relationship ManyToOne {
 }
 
 relationship ManyToOne {
-	MultipleChoiceAnswer to User
+	MultipleChoiceAnswer{student} to Person
+}
+
+relationship OneToOne {
+	Person{applicationAdmission} to ApplicationAdmission{candidate}
 }
 
 relationship ManyToOne {
-	DiscursiveAnswer to User
+	DiscursiveAnswer{student} to Person
 }
 
 relationship OneToMany {
-	Class{multipleChoice(choosen)} to MultipleChoiceQuestion{class(name)}
+	Person{views} to ContentView
+}
+
+relationship OneToMany {
+	Person{teachingCoursees(name)} to Course{teacher(name)}
+}
+
+relationship ManyToMany {
+	Person{learningCoursees(name)} to Course{students(name)}
+}
+
+relationship OneToOne {
+	Course{applicationAdmission} to ApplicationAdmission{course}
+}
+
+relationship OneToOne {
+	MultipleChoiceAnswer{choosen(response)} to Choice
+}
+
+relationship OneToMany {
+	Course{multipleChoice(choosen)} to MultipleChoiceQuestion{course(name)}
 }
 
 relationship OneToMany {
@@ -97,7 +112,7 @@ relationship OneToMany {
 }
 
 relationship OneToMany {
-	Class{discursiveAnswer(question)} to DiscursiveQuestion{class(name)}
+	Course{discursiveAnswer(question)} to DiscursiveQuestion{course(name)}
 }
 
 relationship OneToMany {
@@ -109,23 +124,15 @@ relationship OneToMany {
 }
 
 relationship OneToMany {
-	Class{contents(fileName)} to Content{class(name)}
+	Course{contents(fileName)} to Content{course(name)}
 }
 
 relationship OneToMany {
-	Lesson{contents(fileName)} to Content{class(name)}
+	Lesson{contents(fileName)} to Content{course(name)}
 }
 
 relationship ManyToMany {
-	Class{lessons(name)} to Lesson{class(name)}
-}
-
-relationship OneToMany {
-	User{teachingClasses(name)} to Class{teacher(name)}
-}
-
-relationship ManyToMany {
-	User{learningClasses(name)} to Class{students(name)}
+	Course{lessons(name)} to Lesson{course(name)}
 }
 
 paginate * with infinite-scroll

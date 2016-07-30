@@ -1,0 +1,27 @@
+{
+    "teachitApp": {
+        "content" : {
+            "home": {
+                "title": "Contents",
+                "createLabel": "Criar novo Content",
+                "createOrEditLabel": "Criar ou editar Content",
+                "search": "Pesquisar por Content"
+            },
+            "created": "Um novo Content é criado com o identificador {{ param }}",
+            "updated": "Um Content é atualizado com o identificador {{ param }}",
+            "deleted": "Um Content é deletado com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza de que deseja excluir Content {{ id }}?"
+            },
+            "detail": {
+                "title": "Content"
+            },
+            "fileName": "File Name",
+            "startDate": "Start Date",
+            "description": "Description",
+            "text": "Text",
+            "course": "Course",
+            "course": "Course"
+        }
+    }
+}

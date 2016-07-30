@@ -1,0 +1,30 @@
+{
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "relationshipName": "choosen",
+      "otherEntityName": "choice",
+      "otherEntityField": "response",
+      "ownerSide": true,
+      "otherEntityRelationshipName": "multipleChoiceAnswer"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "relationshipName": "question",
+      "otherEntityName": "multipleChoiceQuestion",
+      "otherEntityField": "question"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "relationshipName": "student",
+      "otherEntityName": "person",
+      "otherEntityField": "id"
+    }
+  ],
+  "fields": [],
+  "changelogDate": "20160730195923",
+  "entityTableName": "multiple_choice_answer",
+  "dto": "mapstruct",
+  "pagination": "infinite-scroll",
+  "service": "serviceImpl"
+}

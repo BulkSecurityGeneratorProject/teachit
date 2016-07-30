@@ -1,0 +1,52 @@
+{
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "relationshipName": "multipleChoice",
+      "otherEntityName": "multipleChoiceQuestion",
+      "otherEntityRelationshipName": "lesson"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "relationshipName": "discursiveAnswer",
+      "otherEntityName": "discursiveQuestion",
+      "otherEntityRelationshipName": "lesson"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "relationshipName": "contents",
+      "otherEntityName": "content",
+      "otherEntityRelationshipName": "course"
+    },
+    {
+      "relationshipType": "many-to-many",
+      "relationshipName": "course",
+      "otherEntityName": "course",
+      "ownerSide": false,
+      "otherEntityRelationshipName": "lessons"
+    }
+  ],
+  "fields": [
+    {
+      "fieldName": "ordering",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "startDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    }
+  ],
+  "changelogDate": "20160730195057",
+  "entityTableName": "lesson",
+  "dto": "mapstruct",
+  "pagination": "infinite-scroll",
+  "service": "serviceImpl"
+}
