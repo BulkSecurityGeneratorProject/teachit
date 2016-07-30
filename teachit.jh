@@ -1,0 +1,135 @@
+
+
+entity Content {
+	fileName String,
+    startDate LocalDate,
+    description String,
+    text String
+}
+
+entity MultipleChoiceQuestion {
+	ordering Integer,
+    startDate LocalDate,
+    question String
+}
+
+entity DiscursiveQuestion {
+	ordering Integer,
+    startDate LocalDate,
+    question String
+}
+
+entity DiscursiveAnswer {
+    answer String
+}
+
+entity MultipleChoiceAnswer {
+}
+
+entity Choice {
+	response String,
+    correct Boolean,
+    ordering Integer
+}
+
+entity Class {
+	code String,
+    startDate LocalDate,
+    name String,
+    public Boolean
+}
+
+entity ApplicationAdmission {
+	requestDate LocalDate,
+    accepted Boolean
+}
+
+entity ContentView {
+	view Boolean,
+    content Content
+}
+
+entity Lesson {
+	ordering Integer,
+    startDate LocalDate,
+    name String,
+    description String
+}
+
+relationship OneToOne {
+	Class to ApplicationAdmission
+}
+
+relationship OneToOne {
+	User to ApplicationAdmission
+}
+
+relationship ManyToMany {
+	User to ContentView
+}
+
+relationship OneToOne {
+	MultipleChoiceAnswer{choosen(response)} to Choice
+}
+
+relationship ManyToOne {
+	MultipleChoiceAnswer{question(question)} to MultipleChoiceQuestion
+}
+
+relationship ManyToOne {
+	DiscursiveAnswer{question(question)} to DiscursiveQuestion
+}
+
+relationship ManyToOne {
+	MultipleChoiceAnswer to User
+}
+
+relationship ManyToOne {
+	DiscursiveAnswer to User
+}
+
+relationship OneToMany {
+	Class{multipleChoice(choosen)} to MultipleChoiceQuestion{class(name)}
+}
+
+relationship OneToMany {
+	MultipleChoiceQuestion{answer(response)} to Choice{question(question)}
+}
+
+relationship OneToMany {
+	Class{discursiveAnswer(question)} to DiscursiveQuestion{class(name)}
+}
+
+relationship OneToMany {
+	Lesson{multipleChoice(question)} to MultipleChoiceQuestion{lesson(name)}
+}
+
+relationship OneToMany {
+	Lesson{discursiveAnswer(question)} to DiscursiveQuestion{lesson(name)}
+}
+
+relationship OneToMany {
+	Class{contents(fileName)} to Content{class(name)}
+}
+
+relationship OneToMany {
+	Lesson{contents(fileName)} to Content{class(name)}
+}
+
+relationship ManyToMany {
+	Class{lessons(name)} to Lesson{class(name)}
+}
+
+relationship OneToMany {
+	User{teachingClasses(name)} to Class{teacher(name)}
+}
+
+relationship ManyToMany {
+	User{learningClasses(name)} to Class{students(name)}
+}
+
+paginate * with infinite-scroll
+
+dto * with mapstruct
+
+service * with serviceImpl
