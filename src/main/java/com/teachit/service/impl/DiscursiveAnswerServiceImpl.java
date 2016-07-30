@@ -3,8 +3,6 @@ package com.teachit.service.impl;
 import com.teachit.service.DiscursiveAnswerService;
 import com.teachit.domain.DiscursiveAnswer;
 import com.teachit.repository.DiscursiveAnswerRepository;
-import com.teachit.web.rest.dto.DiscursiveAnswerDTO;
-import com.teachit.web.rest.mapper.DiscursiveAnswerMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -13,9 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Service Implementation for managing DiscursiveAnswer.
@@ -29,20 +25,15 @@ public class DiscursiveAnswerServiceImpl implements DiscursiveAnswerService{
     @Inject
     private DiscursiveAnswerRepository discursiveAnswerRepository;
     
-    @Inject
-    private DiscursiveAnswerMapper discursiveAnswerMapper;
-    
     /**
      * Save a discursiveAnswer.
      * 
-     * @param discursiveAnswerDTO the entity to save
+     * @param discursiveAnswer the entity to save
      * @return the persisted entity
      */
-    public DiscursiveAnswerDTO save(DiscursiveAnswerDTO discursiveAnswerDTO) {
-        log.debug("Request to save DiscursiveAnswer : {}", discursiveAnswerDTO);
-        DiscursiveAnswer discursiveAnswer = discursiveAnswerMapper.discursiveAnswerDTOToDiscursiveAnswer(discursiveAnswerDTO);
-        discursiveAnswer = discursiveAnswerRepository.save(discursiveAnswer);
-        DiscursiveAnswerDTO result = discursiveAnswerMapper.discursiveAnswerToDiscursiveAnswerDTO(discursiveAnswer);
+    public DiscursiveAnswer save(DiscursiveAnswer discursiveAnswer) {
+        log.debug("Request to save DiscursiveAnswer : {}", discursiveAnswer);
+        DiscursiveAnswer result = discursiveAnswerRepository.save(discursiveAnswer);
         return result;
     }
 
@@ -66,11 +57,10 @@ public class DiscursiveAnswerServiceImpl implements DiscursiveAnswerService{
      *  @return the entity
      */
     @Transactional(readOnly = true) 
-    public DiscursiveAnswerDTO findOne(Long id) {
+    public DiscursiveAnswer findOne(Long id) {
         log.debug("Request to get DiscursiveAnswer : {}", id);
         DiscursiveAnswer discursiveAnswer = discursiveAnswerRepository.findOne(id);
-        DiscursiveAnswerDTO discursiveAnswerDTO = discursiveAnswerMapper.discursiveAnswerToDiscursiveAnswerDTO(discursiveAnswer);
-        return discursiveAnswerDTO;
+        return discursiveAnswer;
     }
 
     /**

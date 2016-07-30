@@ -3,8 +3,6 @@ package com.teachit.service.impl;
 import com.teachit.service.MultipleChoiceQuestionService;
 import com.teachit.domain.MultipleChoiceQuestion;
 import com.teachit.repository.MultipleChoiceQuestionRepository;
-import com.teachit.web.rest.dto.MultipleChoiceQuestionDTO;
-import com.teachit.web.rest.mapper.MultipleChoiceQuestionMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -13,9 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Service Implementation for managing MultipleChoiceQuestion.
@@ -29,20 +25,15 @@ public class MultipleChoiceQuestionServiceImpl implements MultipleChoiceQuestion
     @Inject
     private MultipleChoiceQuestionRepository multipleChoiceQuestionRepository;
     
-    @Inject
-    private MultipleChoiceQuestionMapper multipleChoiceQuestionMapper;
-    
     /**
      * Save a multipleChoiceQuestion.
      * 
-     * @param multipleChoiceQuestionDTO the entity to save
+     * @param multipleChoiceQuestion the entity to save
      * @return the persisted entity
      */
-    public MultipleChoiceQuestionDTO save(MultipleChoiceQuestionDTO multipleChoiceQuestionDTO) {
-        log.debug("Request to save MultipleChoiceQuestion : {}", multipleChoiceQuestionDTO);
-        MultipleChoiceQuestion multipleChoiceQuestion = multipleChoiceQuestionMapper.multipleChoiceQuestionDTOToMultipleChoiceQuestion(multipleChoiceQuestionDTO);
-        multipleChoiceQuestion = multipleChoiceQuestionRepository.save(multipleChoiceQuestion);
-        MultipleChoiceQuestionDTO result = multipleChoiceQuestionMapper.multipleChoiceQuestionToMultipleChoiceQuestionDTO(multipleChoiceQuestion);
+    public MultipleChoiceQuestion save(MultipleChoiceQuestion multipleChoiceQuestion) {
+        log.debug("Request to save MultipleChoiceQuestion : {}", multipleChoiceQuestion);
+        MultipleChoiceQuestion result = multipleChoiceQuestionRepository.save(multipleChoiceQuestion);
         return result;
     }
 
@@ -66,11 +57,10 @@ public class MultipleChoiceQuestionServiceImpl implements MultipleChoiceQuestion
      *  @return the entity
      */
     @Transactional(readOnly = true) 
-    public MultipleChoiceQuestionDTO findOne(Long id) {
+    public MultipleChoiceQuestion findOne(Long id) {
         log.debug("Request to get MultipleChoiceQuestion : {}", id);
         MultipleChoiceQuestion multipleChoiceQuestion = multipleChoiceQuestionRepository.findOne(id);
-        MultipleChoiceQuestionDTO multipleChoiceQuestionDTO = multipleChoiceQuestionMapper.multipleChoiceQuestionToMultipleChoiceQuestionDTO(multipleChoiceQuestion);
-        return multipleChoiceQuestionDTO;
+        return multipleChoiceQuestion;
     }
 
     /**

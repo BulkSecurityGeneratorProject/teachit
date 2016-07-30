@@ -23,8 +23,8 @@
                     <th jh-sort-by="startDate"><span translate="teachitApp.content.startDate">Start Date</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="description"><span translate="teachitApp.content.description">Description</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="text"><span translate="teachitApp.content.text">Text</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="courseName"><span translate="teachitApp.content.course">Course</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="courseName"><span translate="teachitApp.content.course">Course</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="course.name"><span translate="teachitApp.content.course">Course</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lesson.name"><span translate="teachitApp.content.lesson">Lesson</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -36,10 +36,10 @@
                     <td>{{content.description}}</td>
                     <td>{{content.text}}</td>
                     <td>
-                        <a ui-sref="course-detail({id:content.courseId})">{{content.courseName}}</a>
+                        <a ui-sref="course-detail({id:content.course.id})">{{content.course.name}}</a>
                     </td>
                     <td>
-                        <a ui-sref="lesson-detail({id:content.courseId})">{{content.courseName}}</a>
+                        <a ui-sref="lesson-detail({id:content.lesson.id})">{{content.lesson.name}}</a>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

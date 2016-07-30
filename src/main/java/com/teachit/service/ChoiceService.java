@@ -1,11 +1,9 @@
 package com.teachit.service;
 
 import com.teachit.domain.Choice;
-import com.teachit.web.rest.dto.ChoiceDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -16,10 +14,10 @@ public interface ChoiceService {
     /**
      * Save a choice.
      * 
-     * @param choiceDTO the entity to save
+     * @param choice the entity to save
      * @return the persisted entity
      */
-    ChoiceDTO save(ChoiceDTO choiceDTO);
+    Choice save(Choice choice);
 
     /**
      *  Get all the choices.
@@ -35,7 +33,7 @@ public interface ChoiceService {
      *  @param id the id of the entity
      *  @return the entity
      */
-    ChoiceDTO findOne(Long id);
+    Choice findOne(Long id);
 
     /**
      *  Delete the "id" choice.

@@ -16,19 +16,19 @@
 
         <div class="form-group">
             <label translate="teachitApp.multipleChoiceAnswer.choosen" for="field_choosen">Choosen</label>
-            <select class="form-control" id="field_choosen" name="choosen" ng-model="vm.multipleChoiceAnswer.choosenId" ng-options="choice.id as choice.response for choice in vm.choosens | orderBy:'id'">
+            <select class="form-control" id="field_choosen" name="choosen" ng-model="vm.multipleChoiceAnswer.choosen" ng-options="choice as choice.response for choice in vm.choosens | orderBy:'id' track by choice.id">
                 <option value=""></option>
             </select>
         </div>
         <div class="form-group">
             <label translate="teachitApp.multipleChoiceAnswer.question" for="field_question">Question</label>
-            <select class="form-control" id="field_question" name="question" ng-model="vm.multipleChoiceAnswer.questionId" ng-options="multipleChoiceQuestion.id as multipleChoiceQuestion.question for multipleChoiceQuestion in vm.multiplechoicequestions"            >
+            <select class="form-control" id="field_question" name="question" ng-model="vm.multipleChoiceAnswer.question" ng-options="multipleChoiceQuestion as multipleChoiceQuestion.question for multipleChoiceQuestion in vm.multiplechoicequestions track by multipleChoiceQuestion.id">
                 <option value=""></option>
             </select>
         </div>
         <div class="form-group">
             <label translate="teachitApp.multipleChoiceAnswer.student" for="field_student">Student</label>
-            <select class="form-control" id="field_student" name="student" ng-model="vm.multipleChoiceAnswer.studentId" ng-options="person.id as person.id for person in vm.people"            >
+            <select class="form-control" id="field_student" name="student" ng-model="vm.multipleChoiceAnswer.student" ng-options="person as person.id for person in vm.people track by person.id">
                 <option value=""></option>
             </select>
         </div>

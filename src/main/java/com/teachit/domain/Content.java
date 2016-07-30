@@ -35,7 +35,7 @@ public class Content implements Serializable {
     private Course course;
 
     @ManyToOne
-    private Lesson course;
+    private Lesson lesson;
 
     public Long getId() {
         return id;
@@ -85,12 +85,12 @@ public class Content implements Serializable {
         this.course = course;
     }
 
-    public Lesson getCourse() {
-        return course;
+    public Lesson getLesson() {
+        return lesson;
     }
 
-    public void setCourse(Lesson lesson) {
-        this.course = lesson;
+    public void setLesson(Lesson lesson) {
+        this.lesson = lesson;
     }
 
     @Override

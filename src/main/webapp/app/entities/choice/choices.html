@@ -22,7 +22,7 @@
                     <th jh-sort-by="response"><span translate="teachitApp.choice.response">Response</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="correct"><span translate="teachitApp.choice.correct">Correct</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="ordering"><span translate="teachitApp.choice.ordering">Ordering</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="questionQuestion"><span translate="teachitApp.choice.question">Question</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="question.question"><span translate="teachitApp.choice.question">Question</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -33,7 +33,7 @@
                     <td>{{choice.correct}}</td>
                     <td>{{choice.ordering}}</td>
                     <td>
-                        <a ui-sref="multiple-choice-question-detail({id:choice.questionId})">{{choice.questionQuestion}}</a>
+                        <a ui-sref="multiple-choice-question-detail({id:choice.question.id})">{{choice.question.question}}</a>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

@@ -3,9 +3,6 @@ package com.teachit.web.rest;
 import com.teachit.TeachitApp;
 import com.teachit.domain.ContentView;
 import com.teachit.repository.ContentViewRepository;
-import com.teachit.service.ContentViewService;
-import com.teachit.web.rest.dto.ContentViewDTO;
-import com.teachit.web.rest.mapper.ContentViewMapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -52,12 +49,6 @@ public class ContentViewResourceIntTest {
     private ContentViewRepository contentViewRepository;
 
     @Inject
-    private ContentViewMapper contentViewMapper;
-
-    @Inject
-    private ContentViewService contentViewService;
-
-    @Inject
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Inject
@@ -71,8 +62,7 @@ public class ContentViewResourceIntTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         ContentViewResource contentViewResource = new ContentViewResource();
-        ReflectionTestUtils.setField(contentViewResource, "contentViewService", contentViewService);
-        ReflectionTestUtils.setField(contentViewResource, "contentViewMapper", contentViewMapper);
+        ReflectionTestUtils.setField(contentViewResource, "contentViewRepository", contentViewRepository);
         this.restContentViewMockMvc = MockMvcBuilders.standaloneSetup(contentViewResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setMessageConverters(jacksonMessageConverter).build();
@@ -90,11 +80,10 @@ public class ContentViewResourceIntTest {
         int databaseSizeBeforeCreate = contentViewRepository.findAll().size();
 
         // Create the ContentView
-        ContentViewDTO contentViewDTO = contentViewMapper.contentViewToContentViewDTO(contentView);
 
         restContentViewMockMvc.perform(post("/api/content-views")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(contentViewDTO)))
+                .content(TestUtil.convertObjectToJsonBytes(contentView)))
                 .andExpect(status().isCreated());
 
         // Validate the ContentView in the database
@@ -151,11 +140,10 @@ public class ContentViewResourceIntTest {
         ContentView updatedContentView = new ContentView();
         updatedContentView.setId(contentView.getId());
         updatedContentView.setView(UPDATED_VIEW);
-        ContentViewDTO contentViewDTO = contentViewMapper.contentViewToContentViewDTO(updatedContentView);
 
         restContentViewMockMvc.perform(put("/api/content-views")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(contentViewDTO)))
+                .content(TestUtil.convertObjectToJsonBytes(updatedContentView)))
                 .andExpect(status().isOk());
 
         // Validate the ContentView in the database

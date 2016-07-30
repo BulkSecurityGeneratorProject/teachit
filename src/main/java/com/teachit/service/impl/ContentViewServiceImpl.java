@@ -3,8 +3,6 @@ package com.teachit.service.impl;
 import com.teachit.service.ContentViewService;
 import com.teachit.domain.ContentView;
 import com.teachit.repository.ContentViewRepository;
-import com.teachit.web.rest.dto.ContentViewDTO;
-import com.teachit.web.rest.mapper.ContentViewMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -13,9 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Service Implementation for managing ContentView.
@@ -29,20 +25,15 @@ public class ContentViewServiceImpl implements ContentViewService{
     @Inject
     private ContentViewRepository contentViewRepository;
     
-    @Inject
-    private ContentViewMapper contentViewMapper;
-    
     /**
      * Save a contentView.
      * 
-     * @param contentViewDTO the entity to save
+     * @param contentView the entity to save
      * @return the persisted entity
      */
-    public ContentViewDTO save(ContentViewDTO contentViewDTO) {
-        log.debug("Request to save ContentView : {}", contentViewDTO);
-        ContentView contentView = contentViewMapper.contentViewDTOToContentView(contentViewDTO);
-        contentView = contentViewRepository.save(contentView);
-        ContentViewDTO result = contentViewMapper.contentViewToContentViewDTO(contentView);
+    public ContentView save(ContentView contentView) {
+        log.debug("Request to save ContentView : {}", contentView);
+        ContentView result = contentViewRepository.save(contentView);
         return result;
     }
 
@@ -66,11 +57,10 @@ public class ContentViewServiceImpl implements ContentViewService{
      *  @return the entity
      */
     @Transactional(readOnly = true) 
-    public ContentViewDTO findOne(Long id) {
+    public ContentView findOne(Long id) {
         log.debug("Request to get ContentView : {}", id);
         ContentView contentView = contentViewRepository.findOne(id);
-        ContentViewDTO contentViewDTO = contentViewMapper.contentViewToContentViewDTO(contentView);
-        return contentViewDTO;
+        return contentView;
     }
 
     /**

@@ -28,10 +28,10 @@ public class ContentDTO implements Serializable {
 
     private String courseName;
 
-    private Long courseId;
+    private Long lessonId;
     
 
-    private String courseName;
+    private String lessonName;
 
     public Long getId() {
         return id;
@@ -86,21 +86,21 @@ public class ContentDTO implements Serializable {
         this.courseName = courseName;
     }
 
-    public Long getCourseId() {
-        return courseId;
+    public Long getLessonId() {
+        return lessonId;
     }
 
-    public void setCourseId(Long lessonId) {
-        this.courseId = lessonId;
+    public void setLessonId(Long lessonId) {
+        this.lessonId = lessonId;
     }
 
 
-    public String getCourseName() {
-        return courseName;
+    public String getLessonName() {
+        return lessonName;
     }
 
-    public void setCourseName(String lessonName) {
-        this.courseName = lessonName;
+    public void setLessonName(String lessonName) {
+        this.lessonName = lessonName;
     }
 
     @Override

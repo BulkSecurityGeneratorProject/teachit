@@ -20,8 +20,8 @@
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.reset()">
                     <th jh-sort-by="id"><span translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="view"><span translate="teachitApp.contentView.view">View</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="personId"><span translate="teachitApp.contentView.person">Person</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="contentDescription"><span translate="teachitApp.contentView.content">Content</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="person.id"><span translate="teachitApp.contentView.person">Person</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="content.description"><span translate="teachitApp.contentView.content">Content</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -30,10 +30,10 @@
                     <td><a ui-sref="content-view-detail({id:contentView.id})">{{contentView.id}}</a></td>
                     <td>{{contentView.view}}</td>
                     <td>
-                        <a ui-sref="person-detail({id:contentView.personId})">{{contentView.personId}}</a>
+                        <a ui-sref="person-detail({id:contentView.person.id})">{{contentView.person.id}}</a>
                     </td>
                     <td>
-                        <a ui-sref="content-detail({id:contentView.contentId})">{{contentView.contentDescription}}</a>
+                        <a ui-sref="content-detail({id:contentView.content.id})">{{contentView.content.description}}</a>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

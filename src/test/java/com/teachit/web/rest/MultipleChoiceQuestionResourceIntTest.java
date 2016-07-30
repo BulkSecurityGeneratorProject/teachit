@@ -3,9 +3,6 @@ package com.teachit.web.rest;
 import com.teachit.TeachitApp;
 import com.teachit.domain.MultipleChoiceQuestion;
 import com.teachit.repository.MultipleChoiceQuestionRepository;
-import com.teachit.service.MultipleChoiceQuestionService;
-import com.teachit.web.rest.dto.MultipleChoiceQuestionDTO;
-import com.teachit.web.rest.mapper.MultipleChoiceQuestionMapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -59,12 +56,6 @@ public class MultipleChoiceQuestionResourceIntTest {
     private MultipleChoiceQuestionRepository multipleChoiceQuestionRepository;
 
     @Inject
-    private MultipleChoiceQuestionMapper multipleChoiceQuestionMapper;
-
-    @Inject
-    private MultipleChoiceQuestionService multipleChoiceQuestionService;
-
-    @Inject
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Inject
@@ -78,8 +69,7 @@ public class MultipleChoiceQuestionResourceIntTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         MultipleChoiceQuestionResource multipleChoiceQuestionResource = new MultipleChoiceQuestionResource();
-        ReflectionTestUtils.setField(multipleChoiceQuestionResource, "multipleChoiceQuestionService", multipleChoiceQuestionService);
-        ReflectionTestUtils.setField(multipleChoiceQuestionResource, "multipleChoiceQuestionMapper", multipleChoiceQuestionMapper);
+        ReflectionTestUtils.setField(multipleChoiceQuestionResource, "multipleChoiceQuestionRepository", multipleChoiceQuestionRepository);
         this.restMultipleChoiceQuestionMockMvc = MockMvcBuilders.standaloneSetup(multipleChoiceQuestionResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setMessageConverters(jacksonMessageConverter).build();
@@ -99,11 +89,10 @@ public class MultipleChoiceQuestionResourceIntTest {
         int databaseSizeBeforeCreate = multipleChoiceQuestionRepository.findAll().size();
 
         // Create the MultipleChoiceQuestion
-        MultipleChoiceQuestionDTO multipleChoiceQuestionDTO = multipleChoiceQuestionMapper.multipleChoiceQuestionToMultipleChoiceQuestionDTO(multipleChoiceQuestion);
 
         restMultipleChoiceQuestionMockMvc.perform(post("/api/multiple-choice-questions")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(multipleChoiceQuestionDTO)))
+                .content(TestUtil.convertObjectToJsonBytes(multipleChoiceQuestion)))
                 .andExpect(status().isCreated());
 
         // Validate the MultipleChoiceQuestion in the database
@@ -168,11 +157,10 @@ public class MultipleChoiceQuestionResourceIntTest {
         updatedMultipleChoiceQuestion.setOrdering(UPDATED_ORDERING);
         updatedMultipleChoiceQuestion.setStartDate(UPDATED_START_DATE);
         updatedMultipleChoiceQuestion.setQuestion(UPDATED_QUESTION);
-        MultipleChoiceQuestionDTO multipleChoiceQuestionDTO = multipleChoiceQuestionMapper.multipleChoiceQuestionToMultipleChoiceQuestionDTO(updatedMultipleChoiceQuestion);
 
         restMultipleChoiceQuestionMockMvc.perform(put("/api/multiple-choice-questions")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(multipleChoiceQuestionDTO)))
+                .content(TestUtil.convertObjectToJsonBytes(updatedMultipleChoiceQuestion)))
                 .andExpect(status().isOk());
 
         // Validate the MultipleChoiceQuestion in the database

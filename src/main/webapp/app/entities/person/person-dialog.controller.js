@@ -15,10 +15,10 @@
         vm.save = save;
         vm.applicationadmissions = ApplicationAdmission.query({filter: 'candidate-is-null'});
         $q.all([vm.person.$promise, vm.applicationadmissions.$promise]).then(function() {
-            if (!vm.person.applicationAdmissionId) {
+            if (!vm.person.applicationAdmission || !vm.person.applicationAdmission.id) {
                 return $q.reject();
             }
-            return ApplicationAdmission.get({id : vm.person.applicationAdmissionId}).$promise;
+            return ApplicationAdmission.get({id : vm.person.applicationAdmission.id}).$promise;
         }).then(function(applicationAdmission) {
             vm.applicationadmissions.push(applicationAdmission);
         });

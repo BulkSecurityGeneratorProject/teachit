@@ -2,11 +2,9 @@ package com.teachit.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.teachit.domain.ApplicationAdmission;
-import com.teachit.service.ApplicationAdmissionService;
+import com.teachit.repository.ApplicationAdmissionRepository;
 import com.teachit.web.rest.util.HeaderUtil;
 import com.teachit.web.rest.util.PaginationUtil;
-import com.teachit.web.rest.dto.ApplicationAdmissionDTO;
-import com.teachit.web.rest.mapper.ApplicationAdmissionMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -20,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.inject.Inject;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -36,28 +33,25 @@ public class ApplicationAdmissionResource {
     private final Logger log = LoggerFactory.getLogger(ApplicationAdmissionResource.class);
         
     @Inject
-    private ApplicationAdmissionService applicationAdmissionService;
-    
-    @Inject
-    private ApplicationAdmissionMapper applicationAdmissionMapper;
+    private ApplicationAdmissionRepository applicationAdmissionRepository;
     
     /**
      * POST  /application-admissions : Create a new applicationAdmission.
      *
-     * @param applicationAdmissionDTO the applicationAdmissionDTO to create
-     * @return the ResponseEntity with status 201 (Created) and with body the new applicationAdmissionDTO, or with status 400 (Bad Request) if the applicationAdmission has already an ID
+     * @param applicationAdmission the applicationAdmission to create
+     * @return the ResponseEntity with status 201 (Created) and with body the new applicationAdmission, or with status 400 (Bad Request) if the applicationAdmission has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @RequestMapping(value = "/application-admissions",
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<ApplicationAdmissionDTO> createApplicationAdmission(@RequestBody ApplicationAdmissionDTO applicationAdmissionDTO) throws URISyntaxException {
-        log.debug("REST request to save ApplicationAdmission : {}", applicationAdmissionDTO);
-        if (applicationAdmissionDTO.getId() != null) {
+    public ResponseEntity<ApplicationAdmission> createApplicationAdmission(@RequestBody ApplicationAdmission applicationAdmission) throws URISyntaxException {
+        log.debug("REST request to save ApplicationAdmission : {}", applicationAdmission);
+        if (applicationAdmission.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("applicationAdmission", "idexists", "A new applicationAdmission cannot already have an ID")).body(null);
         }
-        ApplicationAdmissionDTO result = applicationAdmissionService.save(applicationAdmissionDTO);
+        ApplicationAdmission result = applicationAdmissionRepository.save(applicationAdmission);
         return ResponseEntity.created(new URI("/api/application-admissions/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("applicationAdmission", result.getId().toString()))
             .body(result);
@@ -66,24 +60,24 @@ public class ApplicationAdmissionResource {
     /**
      * PUT  /application-admissions : Updates an existing applicationAdmission.
      *
-     * @param applicationAdmissionDTO the applicationAdmissionDTO to update
-     * @return the ResponseEntity with status 200 (OK) and with body the updated applicationAdmissionDTO,
-     * or with status 400 (Bad Request) if the applicationAdmissionDTO is not valid,
-     * or with status 500 (Internal Server Error) if the applicationAdmissionDTO couldnt be updated
+     * @param applicationAdmission the applicationAdmission to update
+     * @return the ResponseEntity with status 200 (OK) and with body the updated applicationAdmission,
+     * or with status 400 (Bad Request) if the applicationAdmission is not valid,
+     * or with status 500 (Internal Server Error) if the applicationAdmission couldnt be updated
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @RequestMapping(value = "/application-admissions",
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<ApplicationAdmissionDTO> updateApplicationAdmission(@RequestBody ApplicationAdmissionDTO applicationAdmissionDTO) throws URISyntaxException {
-        log.debug("REST request to update ApplicationAdmission : {}", applicationAdmissionDTO);
-        if (applicationAdmissionDTO.getId() == null) {
-            return createApplicationAdmission(applicationAdmissionDTO);
+    public ResponseEntity<ApplicationAdmission> updateApplicationAdmission(@RequestBody ApplicationAdmission applicationAdmission) throws URISyntaxException {
+        log.debug("REST request to update ApplicationAdmission : {}", applicationAdmission);
+        if (applicationAdmission.getId() == null) {
+            return createApplicationAdmission(applicationAdmission);
         }
-        ApplicationAdmissionDTO result = applicationAdmissionService.save(applicationAdmissionDTO);
+        ApplicationAdmission result = applicationAdmissionRepository.save(applicationAdmission);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert("applicationAdmission", applicationAdmissionDTO.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert("applicationAdmission", applicationAdmission.getId().toString()))
             .body(result);
     }
 
@@ -99,38 +93,42 @@ public class ApplicationAdmissionResource {
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<List<ApplicationAdmissionDTO>> getAllApplicationAdmissions(Pageable pageable, @RequestParam(required = false) String filter)
+    public ResponseEntity<List<ApplicationAdmission>> getAllApplicationAdmissions(Pageable pageable, @RequestParam(required = false) String filter)
         throws URISyntaxException {
         if ("candidate-is-null".equals(filter)) {
             log.debug("REST request to get all ApplicationAdmissions where candidate is null");
-            return new ResponseEntity<>(applicationAdmissionService.findAllWhereCandidateIsNull(),
-                    HttpStatus.OK);
+            return new ResponseEntity<>(StreamSupport
+                .stream(applicationAdmissionRepository.findAll().spliterator(), false)
+                .filter(applicationAdmission -> applicationAdmission.getCandidate() == null)
+                .collect(Collectors.toList()), HttpStatus.OK);
         }
         if ("course-is-null".equals(filter)) {
             log.debug("REST request to get all ApplicationAdmissions where course is null");
-            return new ResponseEntity<>(applicationAdmissionService.findAllWhereCourseIsNull(),
-                    HttpStatus.OK);
+            return new ResponseEntity<>(StreamSupport
+                .stream(applicationAdmissionRepository.findAll().spliterator(), false)
+                .filter(applicationAdmission -> applicationAdmission.getCourse() == null)
+                .collect(Collectors.toList()), HttpStatus.OK);
         }
         log.debug("REST request to get a page of ApplicationAdmissions");
-        Page<ApplicationAdmission> page = applicationAdmissionService.findAll(pageable); 
+        Page<ApplicationAdmission> page = applicationAdmissionRepository.findAll(pageable); 
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/application-admissions");
-        return new ResponseEntity<>(applicationAdmissionMapper.applicationAdmissionsToApplicationAdmissionDTOs(page.getContent()), headers, HttpStatus.OK);
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
     /**
      * GET  /application-admissions/:id : get the "id" applicationAdmission.
      *
-     * @param id the id of the applicationAdmissionDTO to retrieve
-     * @return the ResponseEntity with status 200 (OK) and with body the applicationAdmissionDTO, or with status 404 (Not Found)
+     * @param id the id of the applicationAdmission to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the applicationAdmission, or with status 404 (Not Found)
      */
     @RequestMapping(value = "/application-admissions/{id}",
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<ApplicationAdmissionDTO> getApplicationAdmission(@PathVariable Long id) {
+    public ResponseEntity<ApplicationAdmission> getApplicationAdmission(@PathVariable Long id) {
         log.debug("REST request to get ApplicationAdmission : {}", id);
-        ApplicationAdmissionDTO applicationAdmissionDTO = applicationAdmissionService.findOne(id);
-        return Optional.ofNullable(applicationAdmissionDTO)
+        ApplicationAdmission applicationAdmission = applicationAdmissionRepository.findOne(id);
+        return Optional.ofNullable(applicationAdmission)
             .map(result -> new ResponseEntity<>(
                 result,
                 HttpStatus.OK))
@@ -140,7 +138,7 @@ public class ApplicationAdmissionResource {
     /**
      * DELETE  /application-admissions/:id : delete the "id" applicationAdmission.
      *
-     * @param id the id of the applicationAdmissionDTO to delete
+     * @param id the id of the applicationAdmission to delete
      * @return the ResponseEntity with status 200 (OK)
      */
     @RequestMapping(value = "/application-admissions/{id}",
@@ -149,7 +147,7 @@ public class ApplicationAdmissionResource {
     @Timed
     public ResponseEntity<Void> deleteApplicationAdmission(@PathVariable Long id) {
         log.debug("REST request to delete ApplicationAdmission : {}", id);
-        applicationAdmissionService.delete(id);
+        applicationAdmissionRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("applicationAdmission", id.toString())).build();
     }
 

@@ -20,8 +20,8 @@
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.reset()">
                     <th jh-sort-by="id"><span translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="answer"><span translate="teachitApp.discursiveAnswer.answer">Answer</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="questionQuestion"><span translate="teachitApp.discursiveAnswer.question">Question</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="studentId"><span translate="teachitApp.discursiveAnswer.student">Student</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="question.question"><span translate="teachitApp.discursiveAnswer.question">Question</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="student.id"><span translate="teachitApp.discursiveAnswer.student">Student</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -30,10 +30,10 @@
                     <td><a ui-sref="discursive-answer-detail({id:discursiveAnswer.id})">{{discursiveAnswer.id}}</a></td>
                     <td>{{discursiveAnswer.answer}}</td>
                     <td>
-                        <a ui-sref="discursive-question-detail({id:discursiveAnswer.questionId})">{{discursiveAnswer.questionQuestion}}</a>
+                        <a ui-sref="discursive-question-detail({id:discursiveAnswer.question.id})">{{discursiveAnswer.question.question}}</a>
                     </td>
                     <td>
-                        <a ui-sref="person-detail({id:discursiveAnswer.studentId})">{{discursiveAnswer.studentId}}</a>
+                        <a ui-sref="person-detail({id:discursiveAnswer.student.id})">{{discursiveAnswer.student.id}}</a>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

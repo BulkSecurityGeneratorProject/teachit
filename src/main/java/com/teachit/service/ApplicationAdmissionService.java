@@ -1,11 +1,9 @@
 package com.teachit.service;
 
 import com.teachit.domain.ApplicationAdmission;
-import com.teachit.web.rest.dto.ApplicationAdmissionDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -16,10 +14,10 @@ public interface ApplicationAdmissionService {
     /**
      * Save a applicationAdmission.
      * 
-     * @param applicationAdmissionDTO the entity to save
+     * @param applicationAdmission the entity to save
      * @return the persisted entity
      */
-    ApplicationAdmissionDTO save(ApplicationAdmissionDTO applicationAdmissionDTO);
+    ApplicationAdmission save(ApplicationAdmission applicationAdmission);
 
     /**
      *  Get all the applicationAdmissions.
@@ -33,13 +31,13 @@ public interface ApplicationAdmissionService {
      *  
      *  @return the list of entities
      */
-    List<ApplicationAdmissionDTO> findAllWhereCandidateIsNull();
+    List<ApplicationAdmission> findAllWhereCandidateIsNull();
     /**
      *  Get all the applicationAdmissions where Course is null.
      *  
      *  @return the list of entities
      */
-    List<ApplicationAdmissionDTO> findAllWhereCourseIsNull();
+    List<ApplicationAdmission> findAllWhereCourseIsNull();
 
     /**
      *  Get the "id" applicationAdmission.
@@ -47,7 +45,7 @@ public interface ApplicationAdmissionService {
      *  @param id the id of the entity
      *  @return the entity
      */
-    ApplicationAdmissionDTO findOne(Long id);
+    ApplicationAdmission findOne(Long id);
 
     /**
      *  Delete the "id" applicationAdmission.

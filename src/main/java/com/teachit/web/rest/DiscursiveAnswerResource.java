@@ -2,11 +2,9 @@ package com.teachit.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.teachit.domain.DiscursiveAnswer;
-import com.teachit.service.DiscursiveAnswerService;
+import com.teachit.repository.DiscursiveAnswerRepository;
 import com.teachit.web.rest.util.HeaderUtil;
 import com.teachit.web.rest.util.PaginationUtil;
-import com.teachit.web.rest.dto.DiscursiveAnswerDTO;
-import com.teachit.web.rest.mapper.DiscursiveAnswerMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -20,10 +18,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.inject.Inject;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 /**
  * REST controller for managing DiscursiveAnswer.
@@ -35,28 +31,25 @@ public class DiscursiveAnswerResource {
     private final Logger log = LoggerFactory.getLogger(DiscursiveAnswerResource.class);
         
     @Inject
-    private DiscursiveAnswerService discursiveAnswerService;
-    
-    @Inject
-    private DiscursiveAnswerMapper discursiveAnswerMapper;
+    private DiscursiveAnswerRepository discursiveAnswerRepository;
     
     /**
      * POST  /discursive-answers : Create a new discursiveAnswer.
      *
-     * @param discursiveAnswerDTO the discursiveAnswerDTO to create
-     * @return the ResponseEntity with status 201 (Created) and with body the new discursiveAnswerDTO, or with status 400 (Bad Request) if the discursiveAnswer has already an ID
+     * @param discursiveAnswer the discursiveAnswer to create
+     * @return the ResponseEntity with status 201 (Created) and with body the new discursiveAnswer, or with status 400 (Bad Request) if the discursiveAnswer has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @RequestMapping(value = "/discursive-answers",
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<DiscursiveAnswerDTO> createDiscursiveAnswer(@RequestBody DiscursiveAnswerDTO discursiveAnswerDTO) throws URISyntaxException {
-        log.debug("REST request to save DiscursiveAnswer : {}", discursiveAnswerDTO);
-        if (discursiveAnswerDTO.getId() != null) {
+    public ResponseEntity<DiscursiveAnswer> createDiscursiveAnswer(@RequestBody DiscursiveAnswer discursiveAnswer) throws URISyntaxException {
+        log.debug("REST request to save DiscursiveAnswer : {}", discursiveAnswer);
+        if (discursiveAnswer.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("discursiveAnswer", "idexists", "A new discursiveAnswer cannot already have an ID")).body(null);
         }
-        DiscursiveAnswerDTO result = discursiveAnswerService.save(discursiveAnswerDTO);
+        DiscursiveAnswer result = discursiveAnswerRepository.save(discursiveAnswer);
         return ResponseEntity.created(new URI("/api/discursive-answers/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("discursiveAnswer", result.getId().toString()))
             .body(result);
@@ -65,24 +58,24 @@ public class DiscursiveAnswerResource {
     /**
      * PUT  /discursive-answers : Updates an existing discursiveAnswer.
      *
-     * @param discursiveAnswerDTO the discursiveAnswerDTO to update
-     * @return the ResponseEntity with status 200 (OK) and with body the updated discursiveAnswerDTO,
-     * or with status 400 (Bad Request) if the discursiveAnswerDTO is not valid,
-     * or with status 500 (Internal Server Error) if the discursiveAnswerDTO couldnt be updated
+     * @param discursiveAnswer the discursiveAnswer to update
+     * @return the ResponseEntity with status 200 (OK) and with body the updated discursiveAnswer,
+     * or with status 400 (Bad Request) if the discursiveAnswer is not valid,
+     * or with status 500 (Internal Server Error) if the discursiveAnswer couldnt be updated
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @RequestMapping(value = "/discursive-answers",
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<DiscursiveAnswerDTO> updateDiscursiveAnswer(@RequestBody DiscursiveAnswerDTO discursiveAnswerDTO) throws URISyntaxException {
-        log.debug("REST request to update DiscursiveAnswer : {}", discursiveAnswerDTO);
-        if (discursiveAnswerDTO.getId() == null) {
-            return createDiscursiveAnswer(discursiveAnswerDTO);
+    public ResponseEntity<DiscursiveAnswer> updateDiscursiveAnswer(@RequestBody DiscursiveAnswer discursiveAnswer) throws URISyntaxException {
+        log.debug("REST request to update DiscursiveAnswer : {}", discursiveAnswer);
+        if (discursiveAnswer.getId() == null) {
+            return createDiscursiveAnswer(discursiveAnswer);
         }
-        DiscursiveAnswerDTO result = discursiveAnswerService.save(discursiveAnswerDTO);
+        DiscursiveAnswer result = discursiveAnswerRepository.save(discursiveAnswer);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert("discursiveAnswer", discursiveAnswerDTO.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert("discursiveAnswer", discursiveAnswer.getId().toString()))
             .body(result);
     }
 
@@ -97,28 +90,28 @@ public class DiscursiveAnswerResource {
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<List<DiscursiveAnswerDTO>> getAllDiscursiveAnswers(Pageable pageable)
+    public ResponseEntity<List<DiscursiveAnswer>> getAllDiscursiveAnswers(Pageable pageable)
         throws URISyntaxException {
         log.debug("REST request to get a page of DiscursiveAnswers");
-        Page<DiscursiveAnswer> page = discursiveAnswerService.findAll(pageable); 
+        Page<DiscursiveAnswer> page = discursiveAnswerRepository.findAll(pageable); 
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/discursive-answers");
-        return new ResponseEntity<>(discursiveAnswerMapper.discursiveAnswersToDiscursiveAnswerDTOs(page.getContent()), headers, HttpStatus.OK);
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
     /**
      * GET  /discursive-answers/:id : get the "id" discursiveAnswer.
      *
-     * @param id the id of the discursiveAnswerDTO to retrieve
-     * @return the ResponseEntity with status 200 (OK) and with body the discursiveAnswerDTO, or with status 404 (Not Found)
+     * @param id the id of the discursiveAnswer to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the discursiveAnswer, or with status 404 (Not Found)
      */
     @RequestMapping(value = "/discursive-answers/{id}",
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<DiscursiveAnswerDTO> getDiscursiveAnswer(@PathVariable Long id) {
+    public ResponseEntity<DiscursiveAnswer> getDiscursiveAnswer(@PathVariable Long id) {
         log.debug("REST request to get DiscursiveAnswer : {}", id);
-        DiscursiveAnswerDTO discursiveAnswerDTO = discursiveAnswerService.findOne(id);
-        return Optional.ofNullable(discursiveAnswerDTO)
+        DiscursiveAnswer discursiveAnswer = discursiveAnswerRepository.findOne(id);
+        return Optional.ofNullable(discursiveAnswer)
             .map(result -> new ResponseEntity<>(
                 result,
                 HttpStatus.OK))
@@ -128,7 +121,7 @@ public class DiscursiveAnswerResource {
     /**
      * DELETE  /discursive-answers/:id : delete the "id" discursiveAnswer.
      *
-     * @param id the id of the discursiveAnswerDTO to delete
+     * @param id the id of the discursiveAnswer to delete
      * @return the ResponseEntity with status 200 (OK)
      */
     @RequestMapping(value = "/discursive-answers/{id}",
@@ -137,7 +130,7 @@ public class DiscursiveAnswerResource {
     @Timed
     public ResponseEntity<Void> deleteDiscursiveAnswer(@PathVariable Long id) {
         log.debug("REST request to delete DiscursiveAnswer : {}", id);
-        discursiveAnswerService.delete(id);
+        discursiveAnswerRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("discursiveAnswer", id.toString())).build();
     }
 

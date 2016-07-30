@@ -1,11 +1,9 @@
 package com.teachit.service;
 
 import com.teachit.domain.Course;
-import com.teachit.web.rest.dto.CourseDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -16,10 +14,10 @@ public interface CourseService {
     /**
      * Save a course.
      * 
-     * @param courseDTO the entity to save
+     * @param course the entity to save
      * @return the persisted entity
      */
-    CourseDTO save(CourseDTO courseDTO);
+    Course save(Course course);
 
     /**
      *  Get all the courses.
@@ -35,7 +33,7 @@ public interface CourseService {
      *  @param id the id of the entity
      *  @return the entity
      */
-    CourseDTO findOne(Long id);
+    Course findOne(Long id);
 
     /**
      *  Delete the "id" course.

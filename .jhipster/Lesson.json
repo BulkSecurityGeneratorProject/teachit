@@ -16,7 +16,7 @@
       "relationshipType": "one-to-many",
       "relationshipName": "contents",
       "otherEntityName": "content",
-      "otherEntityRelationshipName": "course"
+      "otherEntityRelationshipName": "lesson"
     },
     {
       "relationshipType": "many-to-many",
@@ -44,9 +44,9 @@
       "fieldType": "String"
     }
   ],
-  "changelogDate": "20160730195057",
+  "changelogDate": "20160730202530",
   "entityTableName": "lesson",
-  "dto": "mapstruct",
+  "dto": "no",
   "pagination": "infinite-scroll",
-  "service": "serviceImpl"
+  "service": "no"
 }

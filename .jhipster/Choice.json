@@ -21,9 +21,9 @@
       "fieldType": "Integer"
     }
   ],
-  "changelogDate": "20160730194554",
+  "changelogDate": "20160730202526",
   "entityTableName": "choice",
-  "dto": "mapstruct",
+  "dto": "no",
   "pagination": "infinite-scroll",
-  "service": "serviceImpl"
+  "service": "no"
 }

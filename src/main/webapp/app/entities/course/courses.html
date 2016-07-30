@@ -22,9 +22,9 @@
                     <th jh-sort-by="code"><span translate="teachitApp.course.code">Code</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="startDate"><span translate="teachitApp.course.startDate">Start Date</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="name"><span translate="teachitApp.course.name">Name</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="public"><span translate="teachitApp.course.public">Public</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="applicationAdmissionId"><span translate="teachitApp.course.applicationAdmission">Application Admission</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="teacherName"><span translate="teachitApp.course.teacher">Teacher</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="openCourse"><span translate="teachitApp.course.openCourse">Open Course</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="applicationAdmission.id"><span translate="teachitApp.course.applicationAdmission">Application Admission</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="teacher.name"><span translate="teachitApp.course.teacher">Teacher</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -34,12 +34,12 @@
                     <td>{{course.code}}</td>
                         <td>{{course.startDate | date:'mediumDate'}}</td>
                     <td>{{course.name}}</td>
-                    <td>{{course.public}}</td>
+                    <td>{{course.openCourse}}</td>
                     <td>
-                        <a ui-sref="application-admission-detail({id:course.applicationAdmissionId})">{{course.applicationAdmissionId}}</a>
+                        <a ui-sref="application-admission-detail({id:course.applicationAdmission.id})">{{course.applicationAdmission.id}}</a>
                     </td>
                     <td>
-                        <a ui-sref="person-detail({id:course.teacherId})">{{course.teacherName}}</a>
+                        <a ui-sref="person-detail({id:course.teacher.id})">{{course.teacher.name}}</a>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

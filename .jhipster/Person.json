@@ -34,9 +34,9 @@
       "fieldType": "Boolean"
     }
   ],
-  "changelogDate": "20160730195918",
+  "changelogDate": "20160730202520",
   "entityTableName": "person",
-  "dto": "mapstruct",
+  "dto": "no",
   "pagination": "infinite-scroll",
-  "service": "serviceImpl"
+  "service": "no"
 }

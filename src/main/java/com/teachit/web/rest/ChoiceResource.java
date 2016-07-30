@@ -2,11 +2,9 @@ package com.teachit.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.teachit.domain.Choice;
-import com.teachit.service.ChoiceService;
+import com.teachit.repository.ChoiceRepository;
 import com.teachit.web.rest.util.HeaderUtil;
 import com.teachit.web.rest.util.PaginationUtil;
-import com.teachit.web.rest.dto.ChoiceDTO;
-import com.teachit.web.rest.mapper.ChoiceMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -20,10 +18,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.inject.Inject;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 /**
  * REST controller for managing Choice.
@@ -35,28 +31,25 @@ public class ChoiceResource {
     private final Logger log = LoggerFactory.getLogger(ChoiceResource.class);
         
     @Inject
-    private ChoiceService choiceService;
-    
-    @Inject
-    private ChoiceMapper choiceMapper;
+    private ChoiceRepository choiceRepository;
     
     /**
      * POST  /choices : Create a new choice.
      *
-     * @param choiceDTO the choiceDTO to create
-     * @return the ResponseEntity with status 201 (Created) and with body the new choiceDTO, or with status 400 (Bad Request) if the choice has already an ID
+     * @param choice the choice to create
+     * @return the ResponseEntity with status 201 (Created) and with body the new choice, or with status 400 (Bad Request) if the choice has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @RequestMapping(value = "/choices",
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<ChoiceDTO> createChoice(@RequestBody ChoiceDTO choiceDTO) throws URISyntaxException {
-        log.debug("REST request to save Choice : {}", choiceDTO);
-        if (choiceDTO.getId() != null) {
+    public ResponseEntity<Choice> createChoice(@RequestBody Choice choice) throws URISyntaxException {
+        log.debug("REST request to save Choice : {}", choice);
+        if (choice.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("choice", "idexists", "A new choice cannot already have an ID")).body(null);
         }
-        ChoiceDTO result = choiceService.save(choiceDTO);
+        Choice result = choiceRepository.save(choice);
         return ResponseEntity.created(new URI("/api/choices/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("choice", result.getId().toString()))
             .body(result);
@@ -65,24 +58,24 @@ public class ChoiceResource {
     /**
      * PUT  /choices : Updates an existing choice.
      *
-     * @param choiceDTO the choiceDTO to update
-     * @return the ResponseEntity with status 200 (OK) and with body the updated choiceDTO,
-     * or with status 400 (Bad Request) if the choiceDTO is not valid,
-     * or with status 500 (Internal Server Error) if the choiceDTO couldnt be updated
+     * @param choice the choice to update
+     * @return the ResponseEntity with status 200 (OK) and with body the updated choice,
+     * or with status 400 (Bad Request) if the choice is not valid,
+     * or with status 500 (Internal Server Error) if the choice couldnt be updated
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @RequestMapping(value = "/choices",
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<ChoiceDTO> updateChoice(@RequestBody ChoiceDTO choiceDTO) throws URISyntaxException {
-        log.debug("REST request to update Choice : {}", choiceDTO);
-        if (choiceDTO.getId() == null) {
-            return createChoice(choiceDTO);
+    public ResponseEntity<Choice> updateChoice(@RequestBody Choice choice) throws URISyntaxException {
+        log.debug("REST request to update Choice : {}", choice);
+        if (choice.getId() == null) {
+            return createChoice(choice);
         }
-        ChoiceDTO result = choiceService.save(choiceDTO);
+        Choice result = choiceRepository.save(choice);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert("choice", choiceDTO.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert("choice", choice.getId().toString()))
             .body(result);
     }
 
@@ -97,28 +90,28 @@ public class ChoiceResource {
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<List<ChoiceDTO>> getAllChoices(Pageable pageable)
+    public ResponseEntity<List<Choice>> getAllChoices(Pageable pageable)
         throws URISyntaxException {
         log.debug("REST request to get a page of Choices");
-        Page<Choice> page = choiceService.findAll(pageable); 
+        Page<Choice> page = choiceRepository.findAll(pageable); 
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/choices");
-        return new ResponseEntity<>(choiceMapper.choicesToChoiceDTOs(page.getContent()), headers, HttpStatus.OK);
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
     /**
      * GET  /choices/:id : get the "id" choice.
      *
-     * @param id the id of the choiceDTO to retrieve
-     * @return the ResponseEntity with status 200 (OK) and with body the choiceDTO, or with status 404 (Not Found)
+     * @param id the id of the choice to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the choice, or with status 404 (Not Found)
      */
     @RequestMapping(value = "/choices/{id}",
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<ChoiceDTO> getChoice(@PathVariable Long id) {
+    public ResponseEntity<Choice> getChoice(@PathVariable Long id) {
         log.debug("REST request to get Choice : {}", id);
-        ChoiceDTO choiceDTO = choiceService.findOne(id);
-        return Optional.ofNullable(choiceDTO)
+        Choice choice = choiceRepository.findOne(id);
+        return Optional.ofNullable(choice)
             .map(result -> new ResponseEntity<>(
                 result,
                 HttpStatus.OK))
@@ -128,7 +121,7 @@ public class ChoiceResource {
     /**
      * DELETE  /choices/:id : delete the "id" choice.
      *
-     * @param id the id of the choiceDTO to delete
+     * @param id the id of the choice to delete
      * @return the ResponseEntity with status 200 (OK)
      */
     @RequestMapping(value = "/choices/{id}",
@@ -137,7 +130,7 @@ public class ChoiceResource {
     @Timed
     public ResponseEntity<Void> deleteChoice(@PathVariable Long id) {
         log.debug("REST request to delete Choice : {}", id);
-        choiceService.delete(id);
+        choiceRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("choice", id.toString())).build();
     }
 

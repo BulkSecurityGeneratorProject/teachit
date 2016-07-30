@@ -3,9 +3,6 @@ package com.teachit.web.rest;
 import com.teachit.TeachitApp;
 import com.teachit.domain.Lesson;
 import com.teachit.repository.LessonRepository;
-import com.teachit.service.LessonService;
-import com.teachit.web.rest.dto.LessonDTO;
-import com.teachit.web.rest.mapper.LessonMapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -61,12 +58,6 @@ public class LessonResourceIntTest {
     private LessonRepository lessonRepository;
 
     @Inject
-    private LessonMapper lessonMapper;
-
-    @Inject
-    private LessonService lessonService;
-
-    @Inject
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Inject
@@ -80,8 +71,7 @@ public class LessonResourceIntTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         LessonResource lessonResource = new LessonResource();
-        ReflectionTestUtils.setField(lessonResource, "lessonService", lessonService);
-        ReflectionTestUtils.setField(lessonResource, "lessonMapper", lessonMapper);
+        ReflectionTestUtils.setField(lessonResource, "lessonRepository", lessonRepository);
         this.restLessonMockMvc = MockMvcBuilders.standaloneSetup(lessonResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setMessageConverters(jacksonMessageConverter).build();
@@ -102,11 +92,10 @@ public class LessonResourceIntTest {
         int databaseSizeBeforeCreate = lessonRepository.findAll().size();
 
         // Create the Lesson
-        LessonDTO lessonDTO = lessonMapper.lessonToLessonDTO(lesson);
 
         restLessonMockMvc.perform(post("/api/lessons")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(lessonDTO)))
+                .content(TestUtil.convertObjectToJsonBytes(lesson)))
                 .andExpect(status().isCreated());
 
         // Validate the Lesson in the database
@@ -175,11 +164,10 @@ public class LessonResourceIntTest {
         updatedLesson.setStartDate(UPDATED_START_DATE);
         updatedLesson.setName(UPDATED_NAME);
         updatedLesson.setDescription(UPDATED_DESCRIPTION);
-        LessonDTO lessonDTO = lessonMapper.lessonToLessonDTO(updatedLesson);
 
         restLessonMockMvc.perform(put("/api/lessons")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(lessonDTO)))
+                .content(TestUtil.convertObjectToJsonBytes(updatedLesson)))
                 .andExpect(status().isOk());
 
         // Validate the Lesson in the database

@@ -3,8 +3,6 @@ package com.teachit.service.impl;
 import com.teachit.service.PersonService;
 import com.teachit.domain.Person;
 import com.teachit.repository.PersonRepository;
-import com.teachit.web.rest.dto.PersonDTO;
-import com.teachit.web.rest.mapper.PersonMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -13,9 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Service Implementation for managing Person.
@@ -29,20 +25,15 @@ public class PersonServiceImpl implements PersonService{
     @Inject
     private PersonRepository personRepository;
     
-    @Inject
-    private PersonMapper personMapper;
-    
     /**
      * Save a person.
      * 
-     * @param personDTO the entity to save
+     * @param person the entity to save
      * @return the persisted entity
      */
-    public PersonDTO save(PersonDTO personDTO) {
-        log.debug("Request to save Person : {}", personDTO);
-        Person person = personMapper.personDTOToPerson(personDTO);
-        person = personRepository.save(person);
-        PersonDTO result = personMapper.personToPersonDTO(person);
+    public Person save(Person person) {
+        log.debug("Request to save Person : {}", person);
+        Person result = personRepository.save(person);
         return result;
     }
 
@@ -66,11 +57,10 @@ public class PersonServiceImpl implements PersonService{
      *  @return the entity
      */
     @Transactional(readOnly = true) 
-    public PersonDTO findOne(Long id) {
+    public Person findOne(Long id) {
         log.debug("Request to get Person : {}", id);
         Person person = personRepository.findOneWithEagerRelationships(id);
-        PersonDTO personDTO = personMapper.personToPersonDTO(person);
-        return personDTO;
+        return person;
     }
 
     /**

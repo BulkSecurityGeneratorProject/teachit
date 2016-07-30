@@ -20,7 +20,7 @@ public class CourseDTO implements Serializable {
 
     private String name;
 
-    private Boolean public;
+    private Boolean openCourse;
 
 
     private Long applicationAdmissionId;
@@ -60,12 +60,12 @@ public class CourseDTO implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-    public Boolean getPublic() {
-        return public;
+    public Boolean getOpenCourse() {
+        return openCourse;
     }
 
-    public void setPublic(Boolean public) {
-        this.public = public;
+    public void setOpenCourse(Boolean openCourse) {
+        this.openCourse = openCourse;
     }
 
     public Long getApplicationAdmissionId() {
@@ -129,7 +129,7 @@ public class CourseDTO implements Serializable {
             ", code='" + code + "'" +
             ", startDate='" + startDate + "'" +
             ", name='" + name + "'" +
-            ", public='" + public + "'" +
+            ", openCourse='" + openCourse + "'" +
             '}';
     }
 }

@@ -3,9 +3,6 @@ package com.teachit.web.rest;
 import com.teachit.TeachitApp;
 import com.teachit.domain.Course;
 import com.teachit.repository.CourseRepository;
-import com.teachit.service.CourseService;
-import com.teachit.web.rest.dto.CourseDTO;
-import com.teachit.web.rest.mapper.CourseMapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -54,17 +51,11 @@ public class CourseResourceIntTest {
     private static final String DEFAULT_NAME = "AAAAA";
     private static final String UPDATED_NAME = "BBBBB";
 
-    private static final Boolean DEFAULT_PUBLIC = false;
-    private static final Boolean UPDATED_PUBLIC = true;
+    private static final Boolean DEFAULT_OPEN_COURSE = false;
+    private static final Boolean UPDATED_OPEN_COURSE = true;
 
     @Inject
     private CourseRepository courseRepository;
-
-    @Inject
-    private CourseMapper courseMapper;
-
-    @Inject
-    private CourseService courseService;
 
     @Inject
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -80,8 +71,7 @@ public class CourseResourceIntTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         CourseResource courseResource = new CourseResource();
-        ReflectionTestUtils.setField(courseResource, "courseService", courseService);
-        ReflectionTestUtils.setField(courseResource, "courseMapper", courseMapper);
+        ReflectionTestUtils.setField(courseResource, "courseRepository", courseRepository);
         this.restCourseMockMvc = MockMvcBuilders.standaloneSetup(courseResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setMessageConverters(jacksonMessageConverter).build();
@@ -93,7 +83,7 @@ public class CourseResourceIntTest {
         course.setCode(DEFAULT_CODE);
         course.setStartDate(DEFAULT_START_DATE);
         course.setName(DEFAULT_NAME);
-        course.setPublic(DEFAULT_PUBLIC);
+        course.setOpenCourse(DEFAULT_OPEN_COURSE);
     }
 
     @Test
@@ -102,11 +92,10 @@ public class CourseResourceIntTest {
         int databaseSizeBeforeCreate = courseRepository.findAll().size();
 
         // Create the Course
-        CourseDTO courseDTO = courseMapper.courseToCourseDTO(course);
 
         restCourseMockMvc.perform(post("/api/courses")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(courseDTO)))
+                .content(TestUtil.convertObjectToJsonBytes(course)))
                 .andExpect(status().isCreated());
 
         // Validate the Course in the database
@@ -116,7 +105,7 @@ public class CourseResourceIntTest {
         assertThat(testCourse.getCode()).isEqualTo(DEFAULT_CODE);
         assertThat(testCourse.getStartDate()).isEqualTo(DEFAULT_START_DATE);
         assertThat(testCourse.getName()).isEqualTo(DEFAULT_NAME);
-        assertThat(testCourse.isPublic()).isEqualTo(DEFAULT_PUBLIC);
+        assertThat(testCourse.isOpenCourse()).isEqualTo(DEFAULT_OPEN_COURSE);
     }
 
     @Test
@@ -133,7 +122,7 @@ public class CourseResourceIntTest {
                 .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE.toString())))
                 .andExpect(jsonPath("$.[*].startDate").value(hasItem(DEFAULT_START_DATE.toString())))
                 .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-                .andExpect(jsonPath("$.[*].public").value(hasItem(DEFAULT_PUBLIC.booleanValue())));
+                .andExpect(jsonPath("$.[*].openCourse").value(hasItem(DEFAULT_OPEN_COURSE.booleanValue())));
     }
 
     @Test
@@ -150,7 +139,7 @@ public class CourseResourceIntTest {
             .andExpect(jsonPath("$.code").value(DEFAULT_CODE.toString()))
             .andExpect(jsonPath("$.startDate").value(DEFAULT_START_DATE.toString()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
-            .andExpect(jsonPath("$.public").value(DEFAULT_PUBLIC.booleanValue()));
+            .andExpect(jsonPath("$.openCourse").value(DEFAULT_OPEN_COURSE.booleanValue()));
     }
 
     @Test
@@ -174,12 +163,11 @@ public class CourseResourceIntTest {
         updatedCourse.setCode(UPDATED_CODE);
         updatedCourse.setStartDate(UPDATED_START_DATE);
         updatedCourse.setName(UPDATED_NAME);
-        updatedCourse.setPublic(UPDATED_PUBLIC);
-        CourseDTO courseDTO = courseMapper.courseToCourseDTO(updatedCourse);
+        updatedCourse.setOpenCourse(UPDATED_OPEN_COURSE);
 
         restCourseMockMvc.perform(put("/api/courses")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(courseDTO)))
+                .content(TestUtil.convertObjectToJsonBytes(updatedCourse)))
                 .andExpect(status().isOk());
 
         // Validate the Course in the database
@@ -189,7 +177,7 @@ public class CourseResourceIntTest {
         assertThat(testCourse.getCode()).isEqualTo(UPDATED_CODE);
         assertThat(testCourse.getStartDate()).isEqualTo(UPDATED_START_DATE);
         assertThat(testCourse.getName()).isEqualTo(UPDATED_NAME);
-        assertThat(testCourse.isPublic()).isEqualTo(UPDATED_PUBLIC);
+        assertThat(testCourse.isOpenCourse()).isEqualTo(UPDATED_OPEN_COURSE);
     }
 
     @Test

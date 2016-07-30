@@ -40,7 +40,7 @@ entity Course {
 	code String,
     startDate LocalDate,
     name String,
-    public Boolean
+    openCourse Boolean
 }
 
 entity ApplicationAdmission {
@@ -128,7 +128,7 @@ relationship OneToMany {
 }
 
 relationship OneToMany {
-	Lesson{contents(fileName)} to Content{course(name)}
+	Lesson{contents(fileName)} to Content{lesson(name)}
 }
 
 relationship ManyToMany {
@@ -137,6 +137,6 @@ relationship ManyToMany {
 
 paginate * with infinite-scroll
 
-dto * with mapstruct
+//dto * with mapstruct
 
-service * with serviceImpl
+//service * with serviceImpl

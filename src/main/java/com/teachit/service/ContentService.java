@@ -1,11 +1,9 @@
 package com.teachit.service;
 
 import com.teachit.domain.Content;
-import com.teachit.web.rest.dto.ContentDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -16,10 +14,10 @@ public interface ContentService {
     /**
      * Save a content.
      * 
-     * @param contentDTO the entity to save
+     * @param content the entity to save
      * @return the persisted entity
      */
-    ContentDTO save(ContentDTO contentDTO);
+    Content save(Content content);
 
     /**
      *  Get all the contents.
@@ -35,7 +33,7 @@ public interface ContentService {
      *  @param id the id of the entity
      *  @return the entity
      */
-    ContentDTO findOne(Long id);
+    Content findOne(Long id);
 
     /**
      *  Delete the "id" content.

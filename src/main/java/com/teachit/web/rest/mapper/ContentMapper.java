@@ -14,14 +14,14 @@ public interface ContentMapper {
 
     @Mapping(source = "course.id", target = "courseId")
     @Mapping(source = "course.name", target = "courseName")
-    @Mapping(source = "course.id", target = "courseId")
-    @Mapping(source = "course.name", target = "courseName")
+    @Mapping(source = "lesson.id", target = "lessonId")
+    @Mapping(source = "lesson.name", target = "lessonName")
     ContentDTO contentToContentDTO(Content content);
 
     List<ContentDTO> contentsToContentDTOs(List<Content> contents);
 
     @Mapping(source = "courseId", target = "course")
-    @Mapping(source = "courseId", target = "course")
+    @Mapping(source = "lessonId", target = "lesson")
     Content contentDTOToContent(ContentDTO contentDTO);
 
     List<Content> contentDTOsToContents(List<ContentDTO> contentDTOs);

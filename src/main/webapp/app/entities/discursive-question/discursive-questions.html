@@ -22,8 +22,8 @@
                     <th jh-sort-by="ordering"><span translate="teachitApp.discursiveQuestion.ordering">Ordering</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="startDate"><span translate="teachitApp.discursiveQuestion.startDate">Start Date</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="question"><span translate="teachitApp.discursiveQuestion.question">Question</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="courseName"><span translate="teachitApp.discursiveQuestion.course">Course</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="lessonName"><span translate="teachitApp.discursiveQuestion.lesson">Lesson</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="course.name"><span translate="teachitApp.discursiveQuestion.course">Course</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lesson.name"><span translate="teachitApp.discursiveQuestion.lesson">Lesson</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -34,10 +34,10 @@
                         <td>{{discursiveQuestion.startDate | date:'mediumDate'}}</td>
                     <td>{{discursiveQuestion.question}}</td>
                     <td>
-                        <a ui-sref="course-detail({id:discursiveQuestion.courseId})">{{discursiveQuestion.courseName}}</a>
+                        <a ui-sref="course-detail({id:discursiveQuestion.course.id})">{{discursiveQuestion.course.name}}</a>
                     </td>
                     <td>
-                        <a ui-sref="lesson-detail({id:discursiveQuestion.lessonId})">{{discursiveQuestion.lessonName}}</a>
+                        <a ui-sref="lesson-detail({id:discursiveQuestion.lesson.id})">{{discursiveQuestion.lesson.name}}</a>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

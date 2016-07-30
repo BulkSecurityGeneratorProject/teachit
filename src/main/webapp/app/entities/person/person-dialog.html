@@ -22,7 +22,7 @@
 
         <div class="form-group">
             <label translate="teachitApp.person.applicationAdmission" for="field_applicationAdmission">Application Admission</label>
-            <select class="form-control" id="field_applicationAdmission" name="applicationAdmission" ng-model="vm.person.applicationAdmissionId" ng-options="applicationAdmission.id as applicationAdmission.id for applicationAdmission in vm.applicationadmissions | orderBy:'id'">
+            <select class="form-control" id="field_applicationAdmission" name="applicationAdmission" ng-model="vm.person.applicationAdmission" ng-options="applicationAdmission as applicationAdmission.id for applicationAdmission in vm.applicationadmissions | orderBy:'id' track by applicationAdmission.id">
                 <option value=""></option>
             </select>
         </div>

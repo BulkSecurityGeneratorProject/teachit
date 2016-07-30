@@ -3,8 +3,6 @@ package com.teachit.service.impl;
 import com.teachit.service.CourseService;
 import com.teachit.domain.Course;
 import com.teachit.repository.CourseRepository;
-import com.teachit.web.rest.dto.CourseDTO;
-import com.teachit.web.rest.mapper.CourseMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -13,9 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Service Implementation for managing Course.
@@ -29,20 +25,15 @@ public class CourseServiceImpl implements CourseService{
     @Inject
     private CourseRepository courseRepository;
     
-    @Inject
-    private CourseMapper courseMapper;
-    
     /**
      * Save a course.
      * 
-     * @param courseDTO the entity to save
+     * @param course the entity to save
      * @return the persisted entity
      */
-    public CourseDTO save(CourseDTO courseDTO) {
-        log.debug("Request to save Course : {}", courseDTO);
-        Course course = courseMapper.courseDTOToCourse(courseDTO);
-        course = courseRepository.save(course);
-        CourseDTO result = courseMapper.courseToCourseDTO(course);
+    public Course save(Course course) {
+        log.debug("Request to save Course : {}", course);
+        Course result = courseRepository.save(course);
         return result;
     }
 
@@ -66,11 +57,10 @@ public class CourseServiceImpl implements CourseService{
      *  @return the entity
      */
     @Transactional(readOnly = true) 
-    public CourseDTO findOne(Long id) {
+    public Course findOne(Long id) {
         log.debug("Request to get Course : {}", id);
         Course course = courseRepository.findOneWithEagerRelationships(id);
-        CourseDTO courseDTO = courseMapper.courseToCourseDTO(course);
-        return courseDTO;
+        return course;
     }
 
     /**

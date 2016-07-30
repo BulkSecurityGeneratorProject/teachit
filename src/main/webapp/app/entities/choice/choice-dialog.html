@@ -34,7 +34,7 @@
 
         <div class="form-group">
             <label translate="teachitApp.choice.question" for="field_question">Question</label>
-            <select class="form-control" id="field_question" name="question" ng-model="vm.choice.questionId" ng-options="multipleChoiceQuestion.id as multipleChoiceQuestion.question for multipleChoiceQuestion in vm.multiplechoicequestions"            >
+            <select class="form-control" id="field_question" name="question" ng-model="vm.choice.question" ng-options="multipleChoiceQuestion as multipleChoiceQuestion.question for multipleChoiceQuestion in vm.multiplechoicequestions track by multipleChoiceQuestion.id">
                 <option value=""></option>
             </select>
         </div>

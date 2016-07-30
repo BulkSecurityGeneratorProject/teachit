@@ -15,10 +15,10 @@
         vm.save = save;
         vm.choosens = Choice.query({filter: 'multiplechoiceanswer-is-null'});
         $q.all([vm.multipleChoiceAnswer.$promise, vm.choosens.$promise]).then(function() {
-            if (!vm.multipleChoiceAnswer.choosenId) {
+            if (!vm.multipleChoiceAnswer.choosen || !vm.multipleChoiceAnswer.choosen.id) {
                 return $q.reject();
             }
-            return Choice.get({id : vm.multipleChoiceAnswer.choosenId}).$promise;
+            return Choice.get({id : vm.multipleChoiceAnswer.choosen.id}).$promise;
         }).then(function(choosen) {
             vm.choosens.push(choosen);
         });

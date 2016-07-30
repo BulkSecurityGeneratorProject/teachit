@@ -19,7 +19,7 @@
             "code": "Code",
             "startDate": "Start Date",
             "name": "Name",
-            "public": "Public",
+            "openCourse": "Open Course",
             "applicationAdmission": "Application Admission",
             "multipleChoice": "Multiple Choice",
             "discursiveAnswer": "Discursive Answer",

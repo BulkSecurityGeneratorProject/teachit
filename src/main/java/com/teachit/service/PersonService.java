@@ -1,11 +1,9 @@
 package com.teachit.service;
 
 import com.teachit.domain.Person;
-import com.teachit.web.rest.dto.PersonDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -16,10 +14,10 @@ public interface PersonService {
     /**
      * Save a person.
      * 
-     * @param personDTO the entity to save
+     * @param person the entity to save
      * @return the persisted entity
      */
-    PersonDTO save(PersonDTO personDTO);
+    Person save(Person person);
 
     /**
      *  Get all the people.
@@ -35,7 +33,7 @@ public interface PersonService {
      *  @param id the id of the entity
      *  @return the entity
      */
-    PersonDTO findOne(Long id);
+    Person findOne(Long id);
 
     /**
      *  Delete the "id" person.

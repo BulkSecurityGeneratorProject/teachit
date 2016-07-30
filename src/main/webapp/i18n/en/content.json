@@ -21,7 +21,7 @@
             "description": "Description",
             "text": "Text",
             "course": "Course",
-            "course": "Course"
+            "lesson": "Lesson"
         }
     }
 }

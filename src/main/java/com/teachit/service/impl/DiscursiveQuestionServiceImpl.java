@@ -3,8 +3,6 @@ package com.teachit.service.impl;
 import com.teachit.service.DiscursiveQuestionService;
 import com.teachit.domain.DiscursiveQuestion;
 import com.teachit.repository.DiscursiveQuestionRepository;
-import com.teachit.web.rest.dto.DiscursiveQuestionDTO;
-import com.teachit.web.rest.mapper.DiscursiveQuestionMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -13,9 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Service Implementation for managing DiscursiveQuestion.
@@ -29,20 +25,15 @@ public class DiscursiveQuestionServiceImpl implements DiscursiveQuestionService{
     @Inject
     private DiscursiveQuestionRepository discursiveQuestionRepository;
     
-    @Inject
-    private DiscursiveQuestionMapper discursiveQuestionMapper;
-    
     /**
      * Save a discursiveQuestion.
      * 
-     * @param discursiveQuestionDTO the entity to save
+     * @param discursiveQuestion the entity to save
      * @return the persisted entity
      */
-    public DiscursiveQuestionDTO save(DiscursiveQuestionDTO discursiveQuestionDTO) {
-        log.debug("Request to save DiscursiveQuestion : {}", discursiveQuestionDTO);
-        DiscursiveQuestion discursiveQuestion = discursiveQuestionMapper.discursiveQuestionDTOToDiscursiveQuestion(discursiveQuestionDTO);
-        discursiveQuestion = discursiveQuestionRepository.save(discursiveQuestion);
-        DiscursiveQuestionDTO result = discursiveQuestionMapper.discursiveQuestionToDiscursiveQuestionDTO(discursiveQuestion);
+    public DiscursiveQuestion save(DiscursiveQuestion discursiveQuestion) {
+        log.debug("Request to save DiscursiveQuestion : {}", discursiveQuestion);
+        DiscursiveQuestion result = discursiveQuestionRepository.save(discursiveQuestion);
         return result;
     }
 
@@ -66,11 +57,10 @@ public class DiscursiveQuestionServiceImpl implements DiscursiveQuestionService{
      *  @return the entity
      */
     @Transactional(readOnly = true) 
-    public DiscursiveQuestionDTO findOne(Long id) {
+    public DiscursiveQuestion findOne(Long id) {
         log.debug("Request to get DiscursiveQuestion : {}", id);
         DiscursiveQuestion discursiveQuestion = discursiveQuestionRepository.findOne(id);
-        DiscursiveQuestionDTO discursiveQuestionDTO = discursiveQuestionMapper.discursiveQuestionToDiscursiveQuestionDTO(discursiveQuestion);
-        return discursiveQuestionDTO;
+        return discursiveQuestion;
     }
 
     /**

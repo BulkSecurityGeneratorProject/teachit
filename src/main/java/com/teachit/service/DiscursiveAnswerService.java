@@ -1,11 +1,9 @@
 package com.teachit.service;
 
 import com.teachit.domain.DiscursiveAnswer;
-import com.teachit.web.rest.dto.DiscursiveAnswerDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -16,10 +14,10 @@ public interface DiscursiveAnswerService {
     /**
      * Save a discursiveAnswer.
      * 
-     * @param discursiveAnswerDTO the entity to save
+     * @param discursiveAnswer the entity to save
      * @return the persisted entity
      */
-    DiscursiveAnswerDTO save(DiscursiveAnswerDTO discursiveAnswerDTO);
+    DiscursiveAnswer save(DiscursiveAnswer discursiveAnswer);
 
     /**
      *  Get all the discursiveAnswers.
@@ -35,7 +33,7 @@ public interface DiscursiveAnswerService {
      *  @param id the id of the entity
      *  @return the entity
      */
-    DiscursiveAnswerDTO findOne(Long id);
+    DiscursiveAnswer findOne(Long id);
 
     /**
      *  Delete the "id" discursiveAnswer.

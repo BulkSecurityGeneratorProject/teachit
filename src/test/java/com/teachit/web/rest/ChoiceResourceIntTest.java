@@ -3,9 +3,6 @@ package com.teachit.web.rest;
 import com.teachit.TeachitApp;
 import com.teachit.domain.Choice;
 import com.teachit.repository.ChoiceRepository;
-import com.teachit.service.ChoiceService;
-import com.teachit.web.rest.dto.ChoiceDTO;
-import com.teachit.web.rest.mapper.ChoiceMapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -57,12 +54,6 @@ public class ChoiceResourceIntTest {
     private ChoiceRepository choiceRepository;
 
     @Inject
-    private ChoiceMapper choiceMapper;
-
-    @Inject
-    private ChoiceService choiceService;
-
-    @Inject
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Inject
@@ -76,8 +67,7 @@ public class ChoiceResourceIntTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         ChoiceResource choiceResource = new ChoiceResource();
-        ReflectionTestUtils.setField(choiceResource, "choiceService", choiceService);
-        ReflectionTestUtils.setField(choiceResource, "choiceMapper", choiceMapper);
+        ReflectionTestUtils.setField(choiceResource, "choiceRepository", choiceRepository);
         this.restChoiceMockMvc = MockMvcBuilders.standaloneSetup(choiceResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setMessageConverters(jacksonMessageConverter).build();
@@ -97,11 +87,10 @@ public class ChoiceResourceIntTest {
         int databaseSizeBeforeCreate = choiceRepository.findAll().size();
 
         // Create the Choice
-        ChoiceDTO choiceDTO = choiceMapper.choiceToChoiceDTO(choice);
 
         restChoiceMockMvc.perform(post("/api/choices")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(choiceDTO)))
+                .content(TestUtil.convertObjectToJsonBytes(choice)))
                 .andExpect(status().isCreated());
 
         // Validate the Choice in the database
@@ -166,11 +155,10 @@ public class ChoiceResourceIntTest {
         updatedChoice.setResponse(UPDATED_RESPONSE);
         updatedChoice.setCorrect(UPDATED_CORRECT);
         updatedChoice.setOrdering(UPDATED_ORDERING);
-        ChoiceDTO choiceDTO = choiceMapper.choiceToChoiceDTO(updatedChoice);
 
         restChoiceMockMvc.perform(put("/api/choices")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(choiceDTO)))
+                .content(TestUtil.convertObjectToJsonBytes(updatedChoice)))
                 .andExpect(status().isOk());
 
         // Validate the Choice in the database

@@ -3,8 +3,6 @@ package com.teachit.service.impl;
 import com.teachit.service.LessonService;
 import com.teachit.domain.Lesson;
 import com.teachit.repository.LessonRepository;
-import com.teachit.web.rest.dto.LessonDTO;
-import com.teachit.web.rest.mapper.LessonMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -13,9 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Service Implementation for managing Lesson.
@@ -29,20 +25,15 @@ public class LessonServiceImpl implements LessonService{
     @Inject
     private LessonRepository lessonRepository;
     
-    @Inject
-    private LessonMapper lessonMapper;
-    
     /**
      * Save a lesson.
      * 
-     * @param lessonDTO the entity to save
+     * @param lesson the entity to save
      * @return the persisted entity
      */
-    public LessonDTO save(LessonDTO lessonDTO) {
-        log.debug("Request to save Lesson : {}", lessonDTO);
-        Lesson lesson = lessonMapper.lessonDTOToLesson(lessonDTO);
-        lesson = lessonRepository.save(lesson);
-        LessonDTO result = lessonMapper.lessonToLessonDTO(lesson);
+    public Lesson save(Lesson lesson) {
+        log.debug("Request to save Lesson : {}", lesson);
+        Lesson result = lessonRepository.save(lesson);
         return result;
     }
 
@@ -66,11 +57,10 @@ public class LessonServiceImpl implements LessonService{
      *  @return the entity
      */
     @Transactional(readOnly = true) 
-    public LessonDTO findOne(Long id) {
+    public Lesson findOne(Long id) {
         log.debug("Request to get Lesson : {}", id);
         Lesson lesson = lessonRepository.findOne(id);
-        LessonDTO lessonDTO = lessonMapper.lessonToLessonDTO(lesson);
-        return lessonDTO;
+        return lesson;
     }
 
     /**

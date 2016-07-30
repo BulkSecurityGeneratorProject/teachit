@@ -61,13 +61,13 @@
       "fieldType": "String"
     },
     {
-      "fieldName": "public",
+      "fieldName": "openCourse",
       "fieldType": "Boolean"
     }
   ],
-  "changelogDate": "20160730195925",
+  "changelogDate": "20160730202527",
   "entityTableName": "course",
-  "dto": "mapstruct",
+  "dto": "no",
   "pagination": "infinite-scroll",
-  "service": "serviceImpl"
+  "service": "no"
 }

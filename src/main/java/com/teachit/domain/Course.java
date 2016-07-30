@@ -31,8 +31,8 @@ public class Course implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "public")
-    private Boolean public;
+    @Column(name = "open_course")
+    private Boolean openCourse;
 
     @OneToOne
     @JoinColumn(unique = true)
@@ -95,12 +95,12 @@ public class Course implements Serializable {
         this.name = name;
     }
 
-    public Boolean isPublic() {
-        return public;
+    public Boolean isOpenCourse() {
+        return openCourse;
     }
 
-    public void setPublic(Boolean public) {
-        this.public = public;
+    public void setOpenCourse(Boolean openCourse) {
+        this.openCourse = openCourse;
     }
 
     public ApplicationAdmission getApplicationAdmission() {
@@ -186,7 +186,7 @@ public class Course implements Serializable {
             ", code='" + code + "'" +
             ", startDate='" + startDate + "'" +
             ", name='" + name + "'" +
-            ", public='" + public + "'" +
+            ", openCourse='" + openCourse + "'" +
             '}';
     }
 }

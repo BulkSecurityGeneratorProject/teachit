@@ -34,6 +34,31 @@
     <include file="classpath:config/liquibase/changelog/20160730195925_added_entity_Course.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160730195926_added_entity_ApplicationAdmission.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160730195927_added_entity_ContentView.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160730201300_added_entity_Lesson.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160730201351_added_entity_Content.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160730201405_added_entity_Course.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160730201800_added_entity_MultipleChoiceQuestion.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160730201801_added_entity_DiscursiveQuestion.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160730201802_added_entity_DiscursiveAnswer.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160730201803_added_entity_MultipleChoiceAnswer.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160730201804_added_entity_Choice.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160730201805_added_entity_Course.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160730201806_added_entity_ApplicationAdmission.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160730201807_added_entity_ContentView.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160730201808_added_entity_Lesson.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160730201858_added_entity_Person.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160730201859_added_entity_Content.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160730202520_added_entity_Person.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160730202521_added_entity_Content.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160730202522_added_entity_MultipleChoiceQuestion.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160730202523_added_entity_DiscursiveQuestion.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160730202524_added_entity_DiscursiveAnswer.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160730202525_added_entity_MultipleChoiceAnswer.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160730202526_added_entity_Choice.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160730202527_added_entity_Course.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160730202528_added_entity_ApplicationAdmission.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160730202529_added_entity_ContentView.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160730202530_added_entity_Lesson.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="classpath:config/liquibase/changelog/20160730194549_added_entity_constraints_Content.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160730194550_added_entity_constraints_MultipleChoiceQuestion.xml" relativeToChangelogFile="false"/>
@@ -44,5 +69,25 @@
     <include file="classpath:config/liquibase/changelog/20160730195923_added_entity_constraints_MultipleChoiceAnswer.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160730195925_added_entity_constraints_Course.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160730195927_added_entity_constraints_ContentView.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160730201351_added_entity_constraints_Content.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160730201405_added_entity_constraints_Course.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160730201800_added_entity_constraints_MultipleChoiceQuestion.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160730201801_added_entity_constraints_DiscursiveQuestion.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160730201802_added_entity_constraints_DiscursiveAnswer.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160730201803_added_entity_constraints_MultipleChoiceAnswer.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160730201804_added_entity_constraints_Choice.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160730201805_added_entity_constraints_Course.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160730201807_added_entity_constraints_ContentView.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160730201858_added_entity_constraints_Person.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160730201859_added_entity_constraints_Content.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160730202520_added_entity_constraints_Person.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160730202521_added_entity_constraints_Content.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160730202522_added_entity_constraints_MultipleChoiceQuestion.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160730202523_added_entity_constraints_DiscursiveQuestion.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160730202524_added_entity_constraints_DiscursiveAnswer.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160730202525_added_entity_constraints_MultipleChoiceAnswer.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160730202526_added_entity_constraints_Choice.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160730202527_added_entity_constraints_Course.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160730202529_added_entity_constraints_ContentView.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

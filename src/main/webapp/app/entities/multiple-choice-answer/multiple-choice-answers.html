@@ -19,9 +19,9 @@
             <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.reset()">
                     <th jh-sort-by="id"><span translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="choosenResponse"><span translate="teachitApp.multipleChoiceAnswer.choosen">Choosen</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="questionQuestion"><span translate="teachitApp.multipleChoiceAnswer.question">Question</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="studentId"><span translate="teachitApp.multipleChoiceAnswer.student">Student</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="choosen.response"><span translate="teachitApp.multipleChoiceAnswer.choosen">Choosen</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="question.question"><span translate="teachitApp.multipleChoiceAnswer.question">Question</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="student.id"><span translate="teachitApp.multipleChoiceAnswer.student">Student</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -29,13 +29,13 @@
                 <tr ng-repeat="multipleChoiceAnswer in vm.multipleChoiceAnswers track by multipleChoiceAnswer.id">
                     <td><a ui-sref="multiple-choice-answer-detail({id:multipleChoiceAnswer.id})">{{multipleChoiceAnswer.id}}</a></td>
                     <td>
-                        <a ui-sref="choice-detail({id:multipleChoiceAnswer.choosenId})">{{multipleChoiceAnswer.choosenResponse}}</a>
+                        <a ui-sref="choice-detail({id:multipleChoiceAnswer.choosen.id})">{{multipleChoiceAnswer.choosen.response}}</a>
                     </td>
                     <td>
-                        <a ui-sref="multiple-choice-question-detail({id:multipleChoiceAnswer.questionId})">{{multipleChoiceAnswer.questionQuestion}}</a>
+                        <a ui-sref="multiple-choice-question-detail({id:multipleChoiceAnswer.question.id})">{{multipleChoiceAnswer.question.question}}</a>
                     </td>
                     <td>
-                        <a ui-sref="person-detail({id:multipleChoiceAnswer.studentId})">{{multipleChoiceAnswer.studentId}}</a>
+                        <a ui-sref="person-detail({id:multipleChoiceAnswer.student.id})">{{multipleChoiceAnswer.student.id}}</a>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

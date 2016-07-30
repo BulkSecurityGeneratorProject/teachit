@@ -107,7 +107,7 @@
                                 code: null,
                                 startDate: null,
                                 name: null,
-                                public: null,
+                                openCourse: null,
                                 id: null
                             };
                         }

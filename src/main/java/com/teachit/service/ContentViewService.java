@@ -1,11 +1,9 @@
 package com.teachit.service;
 
 import com.teachit.domain.ContentView;
-import com.teachit.web.rest.dto.ContentViewDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -16,10 +14,10 @@ public interface ContentViewService {
     /**
      * Save a contentView.
      * 
-     * @param contentViewDTO the entity to save
+     * @param contentView the entity to save
      * @return the persisted entity
      */
-    ContentViewDTO save(ContentViewDTO contentViewDTO);
+    ContentView save(ContentView contentView);
 
     /**
      *  Get all the contentViews.
@@ -35,7 +33,7 @@ public interface ContentViewService {
      *  @param id the id of the entity
      *  @return the entity
      */
-    ContentViewDTO findOne(Long id);
+    ContentView findOne(Long id);
 
     /**
      *  Delete the "id" contentView.

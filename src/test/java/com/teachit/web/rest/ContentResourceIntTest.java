@@ -3,9 +3,6 @@ package com.teachit.web.rest;
 import com.teachit.TeachitApp;
 import com.teachit.domain.Content;
 import com.teachit.repository.ContentRepository;
-import com.teachit.service.ContentService;
-import com.teachit.web.rest.dto.ContentDTO;
-import com.teachit.web.rest.mapper.ContentMapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -60,12 +57,6 @@ public class ContentResourceIntTest {
     private ContentRepository contentRepository;
 
     @Inject
-    private ContentMapper contentMapper;
-
-    @Inject
-    private ContentService contentService;
-
-    @Inject
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Inject
@@ -79,8 +70,7 @@ public class ContentResourceIntTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         ContentResource contentResource = new ContentResource();
-        ReflectionTestUtils.setField(contentResource, "contentService", contentService);
-        ReflectionTestUtils.setField(contentResource, "contentMapper", contentMapper);
+        ReflectionTestUtils.setField(contentResource, "contentRepository", contentRepository);
         this.restContentMockMvc = MockMvcBuilders.standaloneSetup(contentResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setMessageConverters(jacksonMessageConverter).build();
@@ -101,11 +91,10 @@ public class ContentResourceIntTest {
         int databaseSizeBeforeCreate = contentRepository.findAll().size();
 
         // Create the Content
-        ContentDTO contentDTO = contentMapper.contentToContentDTO(content);
 
         restContentMockMvc.perform(post("/api/contents")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(contentDTO)))
+                .content(TestUtil.convertObjectToJsonBytes(content)))
                 .andExpect(status().isCreated());
 
         // Validate the Content in the database
@@ -174,11 +163,10 @@ public class ContentResourceIntTest {
         updatedContent.setStartDate(UPDATED_START_DATE);
         updatedContent.setDescription(UPDATED_DESCRIPTION);
         updatedContent.setText(UPDATED_TEXT);
-        ContentDTO contentDTO = contentMapper.contentToContentDTO(updatedContent);
 
         restContentMockMvc.perform(put("/api/contents")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(contentDTO)))
+                .content(TestUtil.convertObjectToJsonBytes(updatedContent)))
                 .andExpect(status().isOk());
 
         // Validate the Content in the database

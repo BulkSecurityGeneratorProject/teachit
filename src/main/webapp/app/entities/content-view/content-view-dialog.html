@@ -22,13 +22,13 @@
 
         <div class="form-group">
             <label translate="teachitApp.contentView.person" for="field_person">Person</label>
-            <select class="form-control" id="field_person" name="person" ng-model="vm.contentView.personId" ng-options="person.id as person.id for person in vm.people"            >
+            <select class="form-control" id="field_person" name="person" ng-model="vm.contentView.person" ng-options="person as person.id for person in vm.people track by person.id">
                 <option value=""></option>
             </select>
         </div>
         <div class="form-group">
             <label translate="teachitApp.contentView.content" for="field_content">Content</label>
-            <select class="form-control" id="field_content" name="content" ng-model="vm.contentView.contentId" ng-options="content.id as content.description for content in vm.contents"            >
+            <select class="form-control" id="field_content" name="content" ng-model="vm.contentView.content" ng-options="content as content.description for content in vm.contents track by content.id">
                 <option value=""></option>
             </select>
         </div>

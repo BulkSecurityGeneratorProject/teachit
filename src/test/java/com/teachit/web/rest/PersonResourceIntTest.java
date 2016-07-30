@@ -3,9 +3,6 @@ package com.teachit.web.rest;
 import com.teachit.TeachitApp;
 import com.teachit.domain.Person;
 import com.teachit.repository.PersonRepository;
-import com.teachit.service.PersonService;
-import com.teachit.web.rest.dto.PersonDTO;
-import com.teachit.web.rest.mapper.PersonMapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -52,12 +49,6 @@ public class PersonResourceIntTest {
     private PersonRepository personRepository;
 
     @Inject
-    private PersonMapper personMapper;
-
-    @Inject
-    private PersonService personService;
-
-    @Inject
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Inject
@@ -71,8 +62,7 @@ public class PersonResourceIntTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         PersonResource personResource = new PersonResource();
-        ReflectionTestUtils.setField(personResource, "personService", personService);
-        ReflectionTestUtils.setField(personResource, "personMapper", personMapper);
+        ReflectionTestUtils.setField(personResource, "personRepository", personRepository);
         this.restPersonMockMvc = MockMvcBuilders.standaloneSetup(personResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setMessageConverters(jacksonMessageConverter).build();
@@ -90,11 +80,10 @@ public class PersonResourceIntTest {
         int databaseSizeBeforeCreate = personRepository.findAll().size();
 
         // Create the Person
-        PersonDTO personDTO = personMapper.personToPersonDTO(person);
 
         restPersonMockMvc.perform(post("/api/people")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(personDTO)))
+                .content(TestUtil.convertObjectToJsonBytes(person)))
                 .andExpect(status().isCreated());
 
         // Validate the Person in the database
@@ -151,11 +140,10 @@ public class PersonResourceIntTest {
         Person updatedPerson = new Person();
         updatedPerson.setId(person.getId());
         updatedPerson.setActive(UPDATED_ACTIVE);
-        PersonDTO personDTO = personMapper.personToPersonDTO(updatedPerson);
 
         restPersonMockMvc.perform(put("/api/people")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(personDTO)))
+                .content(TestUtil.convertObjectToJsonBytes(updatedPerson)))
                 .andExpect(status().isOk());
 
         // Validate the Person in the database

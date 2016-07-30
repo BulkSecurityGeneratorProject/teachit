@@ -16,13 +16,13 @@
         <dd>
             <span>{{vm.course.name}}</span>
         </dd>
-        <dt><span translate="teachitApp.course.public">Public</span></dt>
+        <dt><span translate="teachitApp.course.openCourse">Open Course</span></dt>
         <dd>
-            <span>{{vm.course.public}}</span>
+            <span>{{vm.course.openCourse}}</span>
         </dd>
         <dt><span translate="teachitApp.course.applicationAdmission">Application Admission</span></dt>
         <dd>
-            <a ui-sref="application-admission-detail({id:vm.course.applicationAdmissionId})">{{vm.course.applicationAdmissionId}}</a>
+            <a ui-sref="application-admission-detail({id:vm.course.applicationAdmission.id})">{{vm.course.applicationAdmission.id}}</a>
         </dd>
         <dt><span translate="teachitApp.course.lessons">Lessons</span></dt>
         <dd>
@@ -32,7 +32,7 @@
         </dd>
         <dt><span translate="teachitApp.course.teacher">Teacher</span></dt>
         <dd>
-            <a ui-sref="person-detail({id:vm.course.teacherId})">{{vm.course.teacherName}}</a>
+            <a ui-sref="person-detail({id:vm.course.teacher.id})">{{vm.course.teacher.name}}</a>
         </dd>
     </dl>
 

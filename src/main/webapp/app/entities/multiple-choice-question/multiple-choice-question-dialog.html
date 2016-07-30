@@ -38,13 +38,13 @@
 
         <div class="form-group">
             <label translate="teachitApp.multipleChoiceQuestion.course" for="field_course">Course</label>
-            <select class="form-control" id="field_course" name="course" ng-model="vm.multipleChoiceQuestion.courseId" ng-options="course.id as course.name for course in vm.courses"            >
+            <select class="form-control" id="field_course" name="course" ng-model="vm.multipleChoiceQuestion.course" ng-options="course as course.name for course in vm.courses track by course.id">
                 <option value=""></option>
             </select>
         </div>
         <div class="form-group">
             <label translate="teachitApp.multipleChoiceQuestion.lesson" for="field_lesson">Lesson</label>
-            <select class="form-control" id="field_lesson" name="lesson" ng-model="vm.multipleChoiceQuestion.lessonId" ng-options="lesson.id as lesson.name for lesson in vm.lessons"            >
+            <select class="form-control" id="field_lesson" name="lesson" ng-model="vm.multipleChoiceQuestion.lesson" ng-options="lesson as lesson.name for lesson in vm.lessons track by lesson.id">
                 <option value=""></option>
             </select>
         </div>

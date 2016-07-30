@@ -10,11 +10,11 @@
         </dd>
         <dt><span translate="teachitApp.discursiveAnswer.question">Question</span></dt>
         <dd>
-            <a ui-sref="discursive-question-detail({id:vm.discursiveAnswer.questionId})">{{vm.discursiveAnswer.questionQuestion}}</a>
+            <a ui-sref="discursive-question-detail({id:vm.discursiveAnswer.question.id})">{{vm.discursiveAnswer.question.question}}</a>
         </dd>
         <dt><span translate="teachitApp.discursiveAnswer.student">Student</span></dt>
         <dd>
-            <a ui-sref="person-detail({id:vm.discursiveAnswer.studentId})">{{vm.discursiveAnswer.studentId}}</a>
+            <a ui-sref="person-detail({id:vm.discursiveAnswer.student.id})">{{vm.discursiveAnswer.student.id}}</a>
         </dd>
     </dl>
 

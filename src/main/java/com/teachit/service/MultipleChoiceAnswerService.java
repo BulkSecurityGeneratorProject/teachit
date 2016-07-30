@@ -1,11 +1,9 @@
 package com.teachit.service;
 
 import com.teachit.domain.MultipleChoiceAnswer;
-import com.teachit.web.rest.dto.MultipleChoiceAnswerDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -16,10 +14,10 @@ public interface MultipleChoiceAnswerService {
     /**
      * Save a multipleChoiceAnswer.
      * 
-     * @param multipleChoiceAnswerDTO the entity to save
+     * @param multipleChoiceAnswer the entity to save
      * @return the persisted entity
      */
-    MultipleChoiceAnswerDTO save(MultipleChoiceAnswerDTO multipleChoiceAnswerDTO);
+    MultipleChoiceAnswer save(MultipleChoiceAnswer multipleChoiceAnswer);
 
     /**
      *  Get all the multipleChoiceAnswers.
@@ -35,7 +33,7 @@ public interface MultipleChoiceAnswerService {
      *  @param id the id of the entity
      *  @return the entity
      */
-    MultipleChoiceAnswerDTO findOne(Long id);
+    MultipleChoiceAnswer findOne(Long id);
 
     /**
      *  Delete the "id" multipleChoiceAnswer.

@@ -22,9 +22,9 @@
     }
   ],
   "fields": [],
-  "changelogDate": "20160730195923",
+  "changelogDate": "20160730202525",
   "entityTableName": "multiple_choice_answer",
-  "dto": "mapstruct",
+  "dto": "no",
   "pagination": "infinite-scroll",
-  "service": "serviceImpl"
+  "service": "no"
 }

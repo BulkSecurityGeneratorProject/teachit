@@ -3,8 +3,6 @@ package com.teachit.service.impl;
 import com.teachit.service.ChoiceService;
 import com.teachit.domain.Choice;
 import com.teachit.repository.ChoiceRepository;
-import com.teachit.web.rest.dto.ChoiceDTO;
-import com.teachit.web.rest.mapper.ChoiceMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -13,9 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Service Implementation for managing Choice.
@@ -29,20 +25,15 @@ public class ChoiceServiceImpl implements ChoiceService{
     @Inject
     private ChoiceRepository choiceRepository;
     
-    @Inject
-    private ChoiceMapper choiceMapper;
-    
     /**
      * Save a choice.
      * 
-     * @param choiceDTO the entity to save
+     * @param choice the entity to save
      * @return the persisted entity
      */
-    public ChoiceDTO save(ChoiceDTO choiceDTO) {
-        log.debug("Request to save Choice : {}", choiceDTO);
-        Choice choice = choiceMapper.choiceDTOToChoice(choiceDTO);
-        choice = choiceRepository.save(choice);
-        ChoiceDTO result = choiceMapper.choiceToChoiceDTO(choice);
+    public Choice save(Choice choice) {
+        log.debug("Request to save Choice : {}", choice);
+        Choice result = choiceRepository.save(choice);
         return result;
     }
 
@@ -66,11 +57,10 @@ public class ChoiceServiceImpl implements ChoiceService{
      *  @return the entity
      */
     @Transactional(readOnly = true) 
-    public ChoiceDTO findOne(Long id) {
+    public Choice findOne(Long id) {
         log.debug("Request to get Choice : {}", id);
         Choice choice = choiceRepository.findOne(id);
-        ChoiceDTO choiceDTO = choiceMapper.choiceToChoiceDTO(choice);
-        return choiceDTO;
+        return choice;
     }
 
     /**

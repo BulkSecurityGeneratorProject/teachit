@@ -3,8 +3,6 @@ package com.teachit.service.impl;
 import com.teachit.service.ContentService;
 import com.teachit.domain.Content;
 import com.teachit.repository.ContentRepository;
-import com.teachit.web.rest.dto.ContentDTO;
-import com.teachit.web.rest.mapper.ContentMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -13,9 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Service Implementation for managing Content.
@@ -29,20 +25,15 @@ public class ContentServiceImpl implements ContentService{
     @Inject
     private ContentRepository contentRepository;
     
-    @Inject
-    private ContentMapper contentMapper;
-    
     /**
      * Save a content.
      * 
-     * @param contentDTO the entity to save
+     * @param content the entity to save
      * @return the persisted entity
      */
-    public ContentDTO save(ContentDTO contentDTO) {
-        log.debug("Request to save Content : {}", contentDTO);
-        Content content = contentMapper.contentDTOToContent(contentDTO);
-        content = contentRepository.save(content);
-        ContentDTO result = contentMapper.contentToContentDTO(content);
+    public Content save(Content content) {
+        log.debug("Request to save Content : {}", content);
+        Content result = contentRepository.save(content);
         return result;
     }
 
@@ -66,11 +57,10 @@ public class ContentServiceImpl implements ContentService{
      *  @return the entity
      */
     @Transactional(readOnly = true) 
-    public ContentDTO findOne(Long id) {
+    public Content findOne(Long id) {
         log.debug("Request to get Content : {}", id);
         Content content = contentRepository.findOne(id);
-        ContentDTO contentDTO = contentMapper.contentToContentDTO(content);
-        return contentDTO;
+        return content;
     }
 
     /**

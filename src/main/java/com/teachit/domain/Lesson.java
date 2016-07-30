@@ -42,7 +42,7 @@ public class Lesson implements Serializable {
     @JsonIgnore
     private Set<DiscursiveQuestion> discursiveAnswers = new HashSet<>();
 
-    @OneToMany(mappedBy = "course")
+    @OneToMany(mappedBy = "lesson")
     @JsonIgnore
     private Set<Content> contents = new HashSet<>();
 

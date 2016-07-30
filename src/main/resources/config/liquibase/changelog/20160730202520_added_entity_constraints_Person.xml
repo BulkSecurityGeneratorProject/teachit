@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <!--
+        Added the constraints for entity Person.
+    -->
+    <changeSet id="20160730202520-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="application_admission_id"
+                                 baseTableName="person"
+                                 constraintName="fk_person_applicationadmission_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="application_admission"/>
+
+        <addForeignKeyConstraint baseColumnNames="people_id"
+                                 baseTableName="person_learning_coursees"
+                                 constraintName="fk_person_learning_coursees_people_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="person"/>
+        <addForeignKeyConstraint baseColumnNames="learning_coursees_id"
+                                 baseTableName="person_learning_coursees"
+                                 constraintName="fk_person_learning_coursees_learning_coursees_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="course"/>
+        
+    </changeSet>
+</databaseChangeLog>

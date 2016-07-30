@@ -25,9 +25,9 @@
       "fieldType": "Boolean"
     }
   ],
-  "changelogDate": "20160730195926",
+  "changelogDate": "20160730202528",
   "entityTableName": "application_admission",
-  "dto": "mapstruct",
+  "dto": "no",
   "pagination": "infinite-scroll",
-  "service": "serviceImpl"
+  "service": "no"
 }

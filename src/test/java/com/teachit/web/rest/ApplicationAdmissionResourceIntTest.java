@@ -3,9 +3,6 @@ package com.teachit.web.rest;
 import com.teachit.TeachitApp;
 import com.teachit.domain.ApplicationAdmission;
 import com.teachit.repository.ApplicationAdmissionRepository;
-import com.teachit.service.ApplicationAdmissionService;
-import com.teachit.web.rest.dto.ApplicationAdmissionDTO;
-import com.teachit.web.rest.mapper.ApplicationAdmissionMapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -57,12 +54,6 @@ public class ApplicationAdmissionResourceIntTest {
     private ApplicationAdmissionRepository applicationAdmissionRepository;
 
     @Inject
-    private ApplicationAdmissionMapper applicationAdmissionMapper;
-
-    @Inject
-    private ApplicationAdmissionService applicationAdmissionService;
-
-    @Inject
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Inject
@@ -76,8 +67,7 @@ public class ApplicationAdmissionResourceIntTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         ApplicationAdmissionResource applicationAdmissionResource = new ApplicationAdmissionResource();
-        ReflectionTestUtils.setField(applicationAdmissionResource, "applicationAdmissionService", applicationAdmissionService);
-        ReflectionTestUtils.setField(applicationAdmissionResource, "applicationAdmissionMapper", applicationAdmissionMapper);
+        ReflectionTestUtils.setField(applicationAdmissionResource, "applicationAdmissionRepository", applicationAdmissionRepository);
         this.restApplicationAdmissionMockMvc = MockMvcBuilders.standaloneSetup(applicationAdmissionResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setMessageConverters(jacksonMessageConverter).build();
@@ -96,11 +86,10 @@ public class ApplicationAdmissionResourceIntTest {
         int databaseSizeBeforeCreate = applicationAdmissionRepository.findAll().size();
 
         // Create the ApplicationAdmission
-        ApplicationAdmissionDTO applicationAdmissionDTO = applicationAdmissionMapper.applicationAdmissionToApplicationAdmissionDTO(applicationAdmission);
 
         restApplicationAdmissionMockMvc.perform(post("/api/application-admissions")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(applicationAdmissionDTO)))
+                .content(TestUtil.convertObjectToJsonBytes(applicationAdmission)))
                 .andExpect(status().isCreated());
 
         // Validate the ApplicationAdmission in the database
@@ -161,11 +150,10 @@ public class ApplicationAdmissionResourceIntTest {
         updatedApplicationAdmission.setId(applicationAdmission.getId());
         updatedApplicationAdmission.setRequestDate(UPDATED_REQUEST_DATE);
         updatedApplicationAdmission.setAccepted(UPDATED_ACCEPTED);
-        ApplicationAdmissionDTO applicationAdmissionDTO = applicationAdmissionMapper.applicationAdmissionToApplicationAdmissionDTO(updatedApplicationAdmission);
 
         restApplicationAdmissionMockMvc.perform(put("/api/application-admissions")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(applicationAdmissionDTO)))
+                .content(TestUtil.convertObjectToJsonBytes(updatedApplicationAdmission)))
                 .andExpect(status().isOk());
 
         // Validate the ApplicationAdmission in the database

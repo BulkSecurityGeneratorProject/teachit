@@ -3,9 +3,6 @@ package com.teachit.web.rest;
 import com.teachit.TeachitApp;
 import com.teachit.domain.DiscursiveQuestion;
 import com.teachit.repository.DiscursiveQuestionRepository;
-import com.teachit.service.DiscursiveQuestionService;
-import com.teachit.web.rest.dto.DiscursiveQuestionDTO;
-import com.teachit.web.rest.mapper.DiscursiveQuestionMapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -59,12 +56,6 @@ public class DiscursiveQuestionResourceIntTest {
     private DiscursiveQuestionRepository discursiveQuestionRepository;
 
     @Inject
-    private DiscursiveQuestionMapper discursiveQuestionMapper;
-
-    @Inject
-    private DiscursiveQuestionService discursiveQuestionService;
-
-    @Inject
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Inject
@@ -78,8 +69,7 @@ public class DiscursiveQuestionResourceIntTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         DiscursiveQuestionResource discursiveQuestionResource = new DiscursiveQuestionResource();
-        ReflectionTestUtils.setField(discursiveQuestionResource, "discursiveQuestionService", discursiveQuestionService);
-        ReflectionTestUtils.setField(discursiveQuestionResource, "discursiveQuestionMapper", discursiveQuestionMapper);
+        ReflectionTestUtils.setField(discursiveQuestionResource, "discursiveQuestionRepository", discursiveQuestionRepository);
         this.restDiscursiveQuestionMockMvc = MockMvcBuilders.standaloneSetup(discursiveQuestionResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setMessageConverters(jacksonMessageConverter).build();
@@ -99,11 +89,10 @@ public class DiscursiveQuestionResourceIntTest {
         int databaseSizeBeforeCreate = discursiveQuestionRepository.findAll().size();
 
         // Create the DiscursiveQuestion
-        DiscursiveQuestionDTO discursiveQuestionDTO = discursiveQuestionMapper.discursiveQuestionToDiscursiveQuestionDTO(discursiveQuestion);
 
         restDiscursiveQuestionMockMvc.perform(post("/api/discursive-questions")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(discursiveQuestionDTO)))
+                .content(TestUtil.convertObjectToJsonBytes(discursiveQuestion)))
                 .andExpect(status().isCreated());
 
         // Validate the DiscursiveQuestion in the database
@@ -168,11 +157,10 @@ public class DiscursiveQuestionResourceIntTest {
         updatedDiscursiveQuestion.setOrdering(UPDATED_ORDERING);
         updatedDiscursiveQuestion.setStartDate(UPDATED_START_DATE);
         updatedDiscursiveQuestion.setQuestion(UPDATED_QUESTION);
-        DiscursiveQuestionDTO discursiveQuestionDTO = discursiveQuestionMapper.discursiveQuestionToDiscursiveQuestionDTO(updatedDiscursiveQuestion);
 
         restDiscursiveQuestionMockMvc.perform(put("/api/discursive-questions")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(discursiveQuestionDTO)))
+                .content(TestUtil.convertObjectToJsonBytes(updatedDiscursiveQuestion)))
                 .andExpect(status().isOk());
 
         // Validate the DiscursiveQuestion in the database

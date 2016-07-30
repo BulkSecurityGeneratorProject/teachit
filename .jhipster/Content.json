@@ -8,7 +8,7 @@
     },
     {
       "relationshipType": "many-to-one",
-      "relationshipName": "course",
+      "relationshipName": "lesson",
       "otherEntityName": "lesson",
       "otherEntityField": "name"
     }
@@ -31,9 +31,9 @@
       "fieldType": "String"
     }
   ],
-  "changelogDate": "20160730194549",
+  "changelogDate": "20160730202521",
   "entityTableName": "content",
-  "dto": "mapstruct",
+  "dto": "no",
   "pagination": "infinite-scroll",
-  "service": "serviceImpl"
+  "service": "no"
 }

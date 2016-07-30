@@ -6,15 +6,15 @@
     <dl class="dl-horizontal jh-entity-details">
         <dt><span translate="teachitApp.multipleChoiceAnswer.choosen">Choosen</span></dt>
         <dd>
-            <a ui-sref="choice-detail({id:vm.multipleChoiceAnswer.choosenId})">{{vm.multipleChoiceAnswer.choosenResponse}}</a>
+            <a ui-sref="choice-detail({id:vm.multipleChoiceAnswer.choosen.id})">{{vm.multipleChoiceAnswer.choosen.response}}</a>
         </dd>
         <dt><span translate="teachitApp.multipleChoiceAnswer.question">Question</span></dt>
         <dd>
-            <a ui-sref="multiple-choice-question-detail({id:vm.multipleChoiceAnswer.questionId})">{{vm.multipleChoiceAnswer.questionQuestion}}</a>
+            <a ui-sref="multiple-choice-question-detail({id:vm.multipleChoiceAnswer.question.id})">{{vm.multipleChoiceAnswer.question.question}}</a>
         </dd>
         <dt><span translate="teachitApp.multipleChoiceAnswer.student">Student</span></dt>
         <dd>
-            <a ui-sref="person-detail({id:vm.multipleChoiceAnswer.studentId})">{{vm.multipleChoiceAnswer.studentId}}</a>
+            <a ui-sref="person-detail({id:vm.multipleChoiceAnswer.student.id})">{{vm.multipleChoiceAnswer.student.id}}</a>
         </dd>
     </dl>
 

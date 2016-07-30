@@ -19,9 +19,9 @@
       "fieldType": "String"
     }
   ],
-  "changelogDate": "20160730195922",
+  "changelogDate": "20160730202524",
   "entityTableName": "discursive_answer",
-  "dto": "mapstruct",
+  "dto": "no",
   "pagination": "infinite-scroll",
-  "service": "serviceImpl"
+  "service": "no"
 }
