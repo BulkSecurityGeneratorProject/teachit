@@ -19,7 +19,7 @@
       "fieldType": "Boolean"
     }
   ],
-  "changelogDate": "20160730202529",
+  "changelogDate": "20160731060804",
   "entityTableName": "content_view",
   "dto": "no",
   "pagination": "infinite-scroll",

@@ -65,7 +65,7 @@
       "fieldType": "Boolean"
     }
   ],
-  "changelogDate": "20160730202527",
+  "changelogDate": "20160731060802",
   "entityTableName": "course",
   "dto": "no",
   "pagination": "infinite-scroll",

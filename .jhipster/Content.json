@@ -31,7 +31,7 @@
       "fieldType": "String"
     }
   ],
-  "changelogDate": "20160730202521",
+  "changelogDate": "20160731060856",
   "entityTableName": "content",
   "dto": "no",
   "pagination": "infinite-scroll",

@@ -34,7 +34,7 @@
       "fieldType": "Boolean"
     }
   ],
-  "changelogDate": "20160730202520",
+  "changelogDate": "20160731060855",
   "entityTableName": "person",
   "dto": "no",
   "pagination": "infinite-scroll",

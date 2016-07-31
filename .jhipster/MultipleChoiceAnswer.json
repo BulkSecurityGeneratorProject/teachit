@@ -22,7 +22,7 @@
     }
   ],
   "fields": [],
-  "changelogDate": "20160730202525",
+  "changelogDate": "20160731060800",
   "entityTableName": "multiple_choice_answer",
   "dto": "no",
   "pagination": "infinite-scroll",

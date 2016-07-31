@@ -44,7 +44,7 @@
       "fieldType": "String"
     }
   ],
-  "changelogDate": "20160730202530",
+  "changelogDate": "20160731060805",
   "entityTableName": "lesson",
   "dto": "no",
   "pagination": "infinite-scroll",

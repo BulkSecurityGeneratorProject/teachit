@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <!--
+        Added the constraints for entity MultipleChoiceAnswer.
+    -->
+    <changeSet id="20160731060800-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="choosen_id"
+                                 baseTableName="multiple_choice_answer"
+                                 constraintName="fk_multiplechoiceanswer_choosen_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="choice"/>
+
+        <addForeignKeyConstraint baseColumnNames="question_id"
+                                 baseTableName="multiple_choice_answer"
+                                 constraintName="fk_multiplechoiceanswer_question_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="multiple_choice_question"/>
+
+        <addForeignKeyConstraint baseColumnNames="student_id"
+                                 baseTableName="multiple_choice_answer"
+                                 constraintName="fk_multiplechoiceanswer_student_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="person"/>
+
+    </changeSet>
+</databaseChangeLog>

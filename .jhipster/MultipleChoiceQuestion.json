@@ -33,7 +33,7 @@
       "fieldType": "String"
     }
   ],
-  "changelogDate": "20160730202522",
+  "changelogDate": "20160731060857",
   "entityTableName": "multiple_choice_question",
   "dto": "no",
   "pagination": "infinite-scroll",
