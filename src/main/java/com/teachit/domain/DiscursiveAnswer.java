@@ -21,6 +21,9 @@ public class DiscursiveAnswer implements Serializable {
     @Column(name = "answer")
     private String answer;
 
+    @Column(name = "score")
+    private Double score;
+
     @ManyToOne
     private DiscursiveQuestion question;
 
@@ -41,6 +44,14 @@ public class DiscursiveAnswer implements Serializable {
 
     public void setAnswer(String answer) {
         this.answer = answer;
+    }
+
+    public Double getScore() {
+        return score;
+    }
+
+    public void setScore(Double score) {
+        this.score = score;
     }
 
     public DiscursiveQuestion getQuestion() {
@@ -84,6 +95,7 @@ public class DiscursiveAnswer implements Serializable {
         return "DiscursiveAnswer{" +
             "id=" + id +
             ", answer='" + answer + "'" +
+            ", score='" + score + "'" +
             '}';
     }
 }

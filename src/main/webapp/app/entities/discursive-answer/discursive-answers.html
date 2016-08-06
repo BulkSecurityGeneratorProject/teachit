@@ -20,6 +20,7 @@
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.reset()">
                     <th jh-sort-by="id"><span translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="answer"><span translate="teachitApp.discursiveAnswer.answer">Answer</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="score"><span translate="teachitApp.discursiveAnswer.score">Score</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="question.question"><span translate="teachitApp.discursiveAnswer.question">Question</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="student.id"><span translate="teachitApp.discursiveAnswer.student">Student</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
@@ -29,6 +30,7 @@
                 <tr ng-repeat="discursiveAnswer in vm.discursiveAnswers track by discursiveAnswer.id">
                     <td><a ui-sref="discursive-answer-detail({id:discursiveAnswer.id})">{{discursiveAnswer.id}}</a></td>
                     <td>{{discursiveAnswer.answer}}</td>
+                    <td>{{discursiveAnswer.score}}</td>
                     <td>
                         <a ui-sref="discursive-question-detail({id:discursiveAnswer.question.id})">{{discursiveAnswer.question.question}}</a>
                     </td>

@@ -105,6 +105,7 @@
                         entity: function () {
                             return {
                                 answer: null,
+                                score: null,
                                 id: null
                             };
                         }

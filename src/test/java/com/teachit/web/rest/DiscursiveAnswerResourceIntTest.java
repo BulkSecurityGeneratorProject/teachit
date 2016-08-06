@@ -44,6 +44,9 @@ public class DiscursiveAnswerResourceIntTest {
     private static final String DEFAULT_ANSWER = "AAAAA";
     private static final String UPDATED_ANSWER = "BBBBB";
 
+    private static final Double DEFAULT_SCORE = 1D;
+    private static final Double UPDATED_SCORE = 2D;
+
     @Inject
     private DiscursiveAnswerRepository discursiveAnswerRepository;
 
@@ -71,6 +74,7 @@ public class DiscursiveAnswerResourceIntTest {
     public void initTest() {
         discursiveAnswer = new DiscursiveAnswer();
         discursiveAnswer.setAnswer(DEFAULT_ANSWER);
+        discursiveAnswer.setScore(DEFAULT_SCORE);
     }
 
     @Test
@@ -90,6 +94,7 @@ public class DiscursiveAnswerResourceIntTest {
         assertThat(discursiveAnswers).hasSize(databaseSizeBeforeCreate + 1);
         DiscursiveAnswer testDiscursiveAnswer = discursiveAnswers.get(discursiveAnswers.size() - 1);
         assertThat(testDiscursiveAnswer.getAnswer()).isEqualTo(DEFAULT_ANSWER);
+        assertThat(testDiscursiveAnswer.getScore()).isEqualTo(DEFAULT_SCORE);
     }
 
     @Test
@@ -103,7 +108,8 @@ public class DiscursiveAnswerResourceIntTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(discursiveAnswer.getId().intValue())))
-                .andExpect(jsonPath("$.[*].answer").value(hasItem(DEFAULT_ANSWER.toString())));
+                .andExpect(jsonPath("$.[*].answer").value(hasItem(DEFAULT_ANSWER.toString())))
+                .andExpect(jsonPath("$.[*].score").value(hasItem(DEFAULT_SCORE.doubleValue())));
     }
 
     @Test
@@ -117,7 +123,8 @@ public class DiscursiveAnswerResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(discursiveAnswer.getId().intValue()))
-            .andExpect(jsonPath("$.answer").value(DEFAULT_ANSWER.toString()));
+            .andExpect(jsonPath("$.answer").value(DEFAULT_ANSWER.toString()))
+            .andExpect(jsonPath("$.score").value(DEFAULT_SCORE.doubleValue()));
     }
 
     @Test
@@ -139,6 +146,7 @@ public class DiscursiveAnswerResourceIntTest {
         DiscursiveAnswer updatedDiscursiveAnswer = new DiscursiveAnswer();
         updatedDiscursiveAnswer.setId(discursiveAnswer.getId());
         updatedDiscursiveAnswer.setAnswer(UPDATED_ANSWER);
+        updatedDiscursiveAnswer.setScore(UPDATED_SCORE);
 
         restDiscursiveAnswerMockMvc.perform(put("/api/discursive-answers")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -150,6 +158,7 @@ public class DiscursiveAnswerResourceIntTest {
         assertThat(discursiveAnswers).hasSize(databaseSizeBeforeUpdate);
         DiscursiveAnswer testDiscursiveAnswer = discursiveAnswers.get(discursiveAnswers.size() - 1);
         assertThat(testDiscursiveAnswer.getAnswer()).isEqualTo(UPDATED_ANSWER);
+        assertThat(testDiscursiveAnswer.getScore()).isEqualTo(UPDATED_SCORE);
     }
 
     @Test

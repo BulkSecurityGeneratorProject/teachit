@@ -17,9 +17,13 @@
     {
       "fieldName": "answer",
       "fieldType": "String"
+    },
+    {
+      "fieldName": "score",
+      "fieldType": "Double"
     }
   ],
-  "changelogDate": "20160731060859",
+  "changelogDate": "20160806025641",
   "entityTableName": "discursive_answer",
   "dto": "no",
   "pagination": "infinite-scroll",

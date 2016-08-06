@@ -16,6 +16,7 @@
     <include file="classpath:config/liquibase/changelog/20160731060857_added_entity_MultipleChoiceQuestion.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160731060858_added_entity_DiscursiveQuestion.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160731060859_added_entity_DiscursiveAnswer.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160806025641_added_entity_DiscursiveAnswer.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="classpath:config/liquibase/changelog/20160731060800_added_entity_constraints_MultipleChoiceAnswer.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160731060801_added_entity_constraints_Choice.xml" relativeToChangelogFile="false"/>
@@ -26,5 +27,6 @@
     <include file="classpath:config/liquibase/changelog/20160731060857_added_entity_constraints_MultipleChoiceQuestion.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160731060858_added_entity_constraints_DiscursiveQuestion.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160731060859_added_entity_constraints_DiscursiveAnswer.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160806025641_added_entity_constraints_DiscursiveAnswer.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

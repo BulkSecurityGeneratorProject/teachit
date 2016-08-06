@@ -24,7 +24,8 @@ entity DiscursiveQuestion {
 }
 
 entity DiscursiveAnswer {
-    answer String
+    answer String,
+    score Double
 }
 
 entity MultipleChoiceAnswer {

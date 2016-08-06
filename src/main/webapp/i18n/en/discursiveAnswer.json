@@ -17,6 +17,7 @@
                 "title": "Discursive Answer"
             },
             "answer": "Answer",
+            "score": "Score",
             "question": "Question",
             "student": "Student"
         }
